@@ -6,14 +6,6 @@ const videoHighlights = [
   "167592-837412994_medium.mp4",
   "38618-418590096_medium.mp4",
   "65692-515098526_medium.mp4",
-  "istockphoto-1448707060-640_adpp_is.mp4",
-  "istockphoto-2160987749-640_adpp_is.mp4",
-  "istockphoto-2199325479-640_adpp_is.mp4",
-  "istockphoto-2269313532-640_adpp_is.mp4",
-  "istockphoto-2244462602-640_adpp_is.mp4",
-  "istockphoto-640247158-640_adpp_is.mp4",
-  "istockphoto-477032140-640_adpp_is.mp4",
-  "istockphoto-1141365940-640_adpp_is.mp4",
 ];
 
 const assetUrl = (fileName: string) => `${import.meta.env.BASE_URL}${fileName}`;
@@ -34,13 +26,22 @@ export function VideoCarousel() {
   }, [isPaused]);
 
   useEffect(() => {
+    const nextIndex = (activeIndex + 1) % videoHighlights.length;
+    const previousIndex = (activeIndex - 1 + videoHighlights.length) % videoHighlights.length;
+
     videoRefs.current.forEach((video, index) => {
       if (!video) return;
+
+      const shouldPreload = index === activeIndex || index === nextIndex || index === previousIndex;
+      video.preload = shouldPreload ? "auto" : "metadata";
+
       if (index === activeIndex) {
         video.muted = true;
+        video.currentTime = 0;
         void video.play().catch(() => undefined);
       } else {
         video.pause();
+        video.currentTime = 0;
       }
     });
   }, [activeIndex]);
@@ -62,8 +63,8 @@ export function VideoCarousel() {
           ref={(element) => {
             videoRefs.current[index] = element;
           }}
-          className={`absolute inset-0 size-full object-cover transition-opacity duration-1000 ease-in-out ${
-            index === activeIndex ? "opacity-100" : "opacity-0"
+          className={`absolute inset-0 size-full object-cover transform-gpu will-change-[opacity] transition-opacity duration-1000 ease-in-out ${
+            index === activeIndex ? "z-10 opacity-100" : "z-0 opacity-0"
           }`}
           src={assetUrl(src)}
           muted
@@ -71,6 +72,13 @@ export function VideoCarousel() {
           playsInline
           preload={index === 0 ? "auto" : "metadata"}
           aria-hidden={index !== activeIndex}
+          onCanPlay={(event) => {
+            if (index === activeIndex) {
+              event.currentTarget.muted = true;
+              event.currentTarget.currentTime = 0;
+              void event.currentTarget.play().catch(() => undefined);
+            }
+          }}
         />
       ))}
 
