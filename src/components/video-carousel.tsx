@@ -4,6 +4,12 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 const videoHighlights = [
   "istockphoto-1448707060-640_adpp_is.mp4",
   "istockphoto-2160987749-640_adpp_is.mp4",
+  "istockphoto-2199325479-640_adpp_is.mp4",
+  "istockphoto-2269313532-640_adpp_is.mp4",
+  "istockphoto-2244462602-640_adpp_is.mp4",
+  "istockphoto-640247158-640_adpp_is.mp4",
+  "istockphoto-477032140-640_adpp_is.mp4",
+  "istockphoto-1141365940-640_adpp_is.mp4",
 ];
 
 const assetUrl = (fileName: string) => `${import.meta.env.BASE_URL}${fileName}`;
