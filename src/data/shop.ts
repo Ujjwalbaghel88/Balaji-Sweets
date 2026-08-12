@@ -5,7 +5,8 @@ export const SHOP = {
   address: "Main Market, Bandol, Madhya Pradesh",
   hours: "8:00 AM - 10:00 PM",
   phone: "+91 8889836913",
-  whatsapp: "91 8889836913",
+  // WhatsApp requires the country code and number without spaces or symbols.
+  whatsapp: "918889836913",
   mapsUrl: "https://maps.app.goo.gl/QnYyra7REPgCbdpB7",
 };
 
