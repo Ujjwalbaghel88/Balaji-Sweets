@@ -2,6 +2,10 @@ import { useEffect, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
 const videoHighlights = [
+  "248474_medium.mp4",
+  "167592-837412994_medium.mp4",
+  "38618-418590096_medium.mp4",
+  "65692-515098526_medium.mp4",
   "istockphoto-1448707060-640_adpp_is.mp4",
   "istockphoto-2160987749-640_adpp_is.mp4",
   "istockphoto-2199325479-640_adpp_is.mp4",
