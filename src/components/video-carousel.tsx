@@ -37,11 +37,9 @@ export function VideoCarousel() {
 
       if (index === activeIndex) {
         video.muted = true;
-        video.currentTime = 0;
         void video.play().catch(() => undefined);
       } else {
         video.pause();
-        video.currentTime = 0;
       }
     });
   }, [activeIndex]);
@@ -72,10 +70,15 @@ export function VideoCarousel() {
           playsInline
           preload={index === 0 ? "auto" : "metadata"}
           aria-hidden={index !== activeIndex}
-          onCanPlay={(event) => {
+          onLoadedData={(event) => {
             if (index === activeIndex) {
               event.currentTarget.muted = true;
-              event.currentTarget.currentTime = 0;
+              void event.currentTarget.play().catch(() => undefined);
+            }
+          }}
+          onCanPlay={(event) => {
+            if (index === activeIndex && event.currentTarget.paused) {
+              event.currentTarget.muted = true;
               void event.currentTarget.play().catch(() => undefined);
             }
           }}
