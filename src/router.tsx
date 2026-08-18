@@ -5,9 +5,7 @@ import { routeTree } from "./routeTree.gen";
 export const getRouter = () => {
   const queryClient = new QueryClient();
   const basepath =
-    import.meta.env.BASE_URL === "/"
-      ? "/"
-      : import.meta.env.BASE_URL.replace(/\/$/, "");
+    import.meta.env.BASE_URL === "/" ? "/" : import.meta.env.BASE_URL.replace(/\/$/, "");
 
   const router = createRouter({
     routeTree,
