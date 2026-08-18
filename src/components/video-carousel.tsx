@@ -88,7 +88,7 @@ export function VideoCarousel() {
       <button
         type="button"
         onClick={() => goTo(activeIndex - 1)}
-        className="absolute left-4 top-1/2 z-20 grid size-10 -translate-y-1/2 place-items-center rounded-full border border-card/40 bg-card/20 text-overlay-foreground backdrop-blur-sm transition hover:bg-card/40"
+        className="pointer-events-auto absolute left-4 top-1/2 z-30 grid size-10 -translate-y-1/2 place-items-center rounded-full border border-card/40 bg-card/20 text-overlay-foreground backdrop-blur-sm transition hover:bg-card/40"
         aria-label="Previous video"
       >
         <ArrowLeft className="size-5" />
@@ -96,13 +96,13 @@ export function VideoCarousel() {
       <button
         type="button"
         onClick={() => goTo(activeIndex + 1)}
-        className="absolute right-4 top-1/2 z-20 grid size-10 -translate-y-1/2 place-items-center rounded-full border border-card/40 bg-card/20 text-overlay-foreground backdrop-blur-sm transition hover:bg-card/40"
+        className="pointer-events-auto absolute right-4 top-1/2 z-30 grid size-10 -translate-y-1/2 place-items-center rounded-full border border-card/40 bg-card/20 text-overlay-foreground backdrop-blur-sm transition hover:bg-card/40"
         aria-label="Next video"
       >
         <ArrowRight className="size-5" />
       </button>
 
-      <div className="absolute bottom-5 left-1/2 z-20 flex -translate-x-1/2 gap-2">
+      <div className="absolute bottom-5 left-1/2 z-30 flex -translate-x-1/2 gap-2">
         {videoHighlights.map((src, index) => (
           <button
             key={src}
