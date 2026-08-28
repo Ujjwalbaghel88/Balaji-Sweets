@@ -81,12 +81,8 @@ function Index() {
 
       <main className="overflow-hidden">
         <section className="relative isolate">
-          <div className="absolute inset-0 -z-10 bg-gradient-to-b from-background via-secondary/30 to-background" />
-          <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-            <div className="absolute left-[-6rem] top-16 size-72 rounded-full bg-[#d9b37a]/25 blur-3xl" />
-            <div className="absolute right-[-4rem] top-24 size-80 rounded-full bg-[#4f6f4a]/18 blur-3xl" />
-            <div className="absolute bottom-[-5rem] left-1/2 size-96 -translate-x-1/2 rounded-full bg-secondary/50 blur-3xl" />
-          </div>
+          <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(217,179,122,0.22),transparent_34%),radial-gradient(circle_at_88%_20%,rgba(79,111,74,0.14),transparent_30%),linear-gradient(to_bottom,var(--color-background),color-mix(in_oklab,var(--color-secondary)_42%,var(--color-background)),var(--color-background))]" />
+          <div className="pointer-events-none absolute inset-0 -z-10 opacity-35 [background-image:linear-gradient(rgba(93,57,37,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(93,57,37,0.06)_1px,transparent_1px)] [background-size:32px_32px] [mask-image:linear-gradient(to_bottom,black,transparent_72%)]" />
 
           <div className="mx-auto grid min-h-[calc(82vh-4rem)] max-w-6xl items-center gap-8 px-4 py-6 lg:grid-cols-[1.05fr_0.95fr] lg:py-10">
             <div className="relative z-10">
@@ -293,7 +289,7 @@ function Index() {
 
         <section className="mx-auto max-w-6xl px-4 pb-6">
           <div className="grid gap-4 lg:grid-cols-[1.2fr_0.8fr]">
-            <div className="rounded-3xl border border-border bg-card p-6 shadow-soft">
+            <div className="p-1">
               <div className="flex flex-wrap items-end justify-between gap-3">
                 <div>
                   <p className="text-xs font-bold uppercase tracking-[0.22em] text-accent">
