@@ -169,7 +169,7 @@ export const products: Product[] = [
     category: "pan",
     price: 30,
     popular: true,
-    image: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=600&h=600&fit=crop",
+    image: "https://images.unsplash.com/photo-1585518419759-87d1e97f7f9e?w=600&h=600&fit=crop",
   },
   {
     id: "mouth-freshener",
@@ -179,7 +179,7 @@ export const products: Product[] = [
     category: "pan",
     price: 5,
     popular: true,
-    image: "https://images.unsplash.com/photo-1571506165871-ee72a35bc9d4?w=600&h=600&fit=crop",
+    image: "https://images.unsplash.com/photo-1599599810941-84ec2c80b7a0?w=600&h=600&fit=crop",
   },
   {
     id: "banarasi-pan",
@@ -188,7 +188,7 @@ export const products: Product[] = [
     group: "Pan",
     category: "pan",
     price: 50,
-    image: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=600&h=600&fit=crop",
+    image: "https://images.unsplash.com/photo-1599599810694-e5ac2a7bac6d?w=600&h=600&fit=crop",
   },
   {
     id: "kurkure",
