@@ -16,6 +16,22 @@ export function waLink(item?: string) {
   return `https://wa.me/${SHOP.whatsapp}?text=${encodeURIComponent(text)}`;
 }
 
+export function waCartLink(items: { name: string; quantity: number; price: number }[]) {
+  const lines = items.map(
+    (item) => `${item.name} x ${item.quantity} = ₹${item.price * item.quantity}`,
+  );
+  const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const text = [
+    "Namaste! Main Balaji Pan & Bakery Shop se order karna chahta/chahti hoon.",
+    "",
+    ...lines,
+    "",
+    `Total: ₹${total}`,
+    "Please confirm availability.",
+  ].join("\n");
+  return `https://wa.me/${SHOP.whatsapp}?text=${encodeURIComponent(text)}`;
+}
+
 export const telLink = `tel:${SHOP.phone.replace(/\s/g, "")}`;
 
 export type Category = {
