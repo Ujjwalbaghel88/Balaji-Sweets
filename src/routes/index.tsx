@@ -117,7 +117,7 @@ function Index() {
           <div className="pointer-events-none absolute inset-0 -z-10 opacity-35 [background-image:linear-gradient(rgba(93,57,37,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(93,57,37,0.06)_1px,transparent_1px)] [background-size:32px_32px] [mask-image:linear-gradient(to_bottom,black,transparent_72%)]" />
 
           <div className="mx-auto grid min-h-[calc(82vh-4rem)] max-w-6xl items-center gap-4 px-3 py-4 sm:gap-6 sm:px-4 sm:py-6 md:items-start md:gap-8 md:grid-cols-[1.05fr_0.95fr] md:py-10">
-            <div className="relative z-10">
+            <div className="order-2 relative z-10 md:order-1">
               <div className="home-reveal inline-flex items-center gap-2 rounded-full border border-[#c8ab7f] bg-[#f5ead5]/95 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-[#5b3721] shadow-soft backdrop-blur sm:px-4 sm:py-2 sm:text-[11px]">
                 <Flame className="size-3 sm:size-3.5 text-[#5b3721]" />
                 Fresh bakery and daily essentials
@@ -222,7 +222,7 @@ function Index() {
               </div>
             </div>
 
-            <div className="home-reveal home-reveal-delay-2 relative z-10 mt-4 sm:mt-6 md:mt-8 md:-mt-10">
+            <div className="home-reveal home-reveal-delay-2 order-1 relative z-10 mt-4 sm:mt-6 md:order-2 md:mt-8 md:-mt-10">
               <div className="home-float relative mx-auto aspect-[3.65/5] max-w-[18rem] overflow-hidden rounded-[1.75rem] border-4 border-[#fff7ea] bg-[#f9f1e1] shadow-[0_24px_70px_-28px_rgba(93,57,37,0.55)] ring-1 ring-[#c8ab7f] sm:max-w-[25rem] sm:rounded-[2.5rem]">
                 <VideoCarousel />
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-foreground/60 via-foreground/15 to-transparent" />
