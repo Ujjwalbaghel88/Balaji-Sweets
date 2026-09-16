@@ -130,7 +130,9 @@ function ProductsPage() {
               </span>
               <div>
                 <p className="text-sm font-bold text-foreground">Your cart</p>
-                <p className="text-xs text-muted-foreground">{cartCount} item{cartCount === 1 ? "" : "s"}</p>
+                <p className="text-xs text-muted-foreground">
+                  {cartCount} item{cartCount === 1 ? "" : "s"}
+                </p>
               </div>
             </div>
             <p className="text-lg font-extrabold text-accent">₹{cartTotal}</p>
