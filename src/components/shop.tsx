@@ -139,7 +139,7 @@ export function Footer() {
   );
 }
 
-export function ProductCard({ product }: { product: Product }) {
+export function ProductCard({ product, onAdd }: { product: Product; onAdd?: () => void }) {
   return (
     <article className="overflow-hidden rounded-xl sm:rounded-2xl border border-border bg-card shadow-soft transition-transform hover:-translate-y-1">
       <div className="relative">
@@ -163,14 +163,24 @@ export function ProductCard({ product }: { product: Product }) {
         </p>
         <div className="mt-2 flex items-center justify-between gap-2">
           <span className="text-sm sm:text-base font-extrabold text-accent">₹{product.price}</span>
-          <a
-            href={waLink(product.name)}
-            target="_blank"
-            rel="noreferrer"
-            className="rounded-lg bg-accent px-2.5 py-1.5 sm:px-3 text-[10px] sm:text-xs font-semibold text-accent-foreground whitespace-nowrap"
-          >
-            Order
-          </a>
+          {onAdd ? (
+            <button
+              type="button"
+              onClick={onAdd}
+              className="rounded-lg bg-accent px-2.5 py-1.5 sm:px-3 text-[10px] sm:text-xs font-semibold text-accent-foreground whitespace-nowrap"
+            >
+              Add to cart
+            </button>
+          ) : (
+            <a
+              href={waLink(product.name)}
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-lg bg-accent px-2.5 py-1.5 sm:px-3 text-[10px] sm:text-xs font-semibold text-accent-foreground whitespace-nowrap"
+            >
+              Order
+            </a>
+          )}
         </div>
       </div>
     </article>

@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { Search, X } from "lucide-react";
+import { Minus, Plus, Search, ShoppingBag, X } from "lucide-react";
 import { Footer, Header, ProductCard } from "@/components/shop";
-import { categories, products } from "@/data/shop";
+import { categories, products, waCartLink } from "@/data/shop";
 
 export const Route = createFileRoute("/products")({
   head: () => ({
@@ -28,6 +28,7 @@ export const Route = createFileRoute("/products")({
 function ProductsPage() {
   const [active, setActive] = useState<string>("all");
   const [query, setQuery] = useState("");
+  const [cart, setCart] = useState<Record<string, number>>({});
   const normalizedQuery = query.trim().toLowerCase();
   const list = products.filter((p) => {
     const matchesCategory = active === "all" || p.category === active;
@@ -36,6 +37,23 @@ function ProductsPage() {
       [p.name, p.nameHi, p.group].some((value) => value.toLowerCase().includes(normalizedQuery));
     return matchesCategory && matchesQuery;
   });
+  const cartItems = products
+    .filter((product) => cart[product.id])
+    .map((product) => ({ ...product, quantity: cart[product.id] }));
+  const cartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+  const cartTotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const addToCart = (id: string) =>
+    setCart((current) => ({ ...current, [id]: (current[id] ?? 0) + 1 }));
+  const changeQuantity = (id: string, amount: number) =>
+    setCart((current) => {
+      const nextQuantity = (current[id] ?? 0) + amount;
+      if (nextQuantity <= 0) {
+        const next = { ...current };
+        delete next[id];
+        return next;
+      }
+      return { ...current, [id]: nextQuantity };
+    });
 
   return (
     <div className="min-h-screen bg-background">
@@ -91,7 +109,7 @@ function ProductsPage() {
         {list.length ? (
           <div className="mt-4 grid grid-cols-2 gap-4 lg:grid-cols-4">
             {list.map((p) => (
-              <ProductCard key={p.id} product={p} />
+              <ProductCard key={p.id} product={p} onAdd={() => addToCart(p.id)} />
             ))}
           </div>
         ) : (
@@ -103,6 +121,56 @@ function ProductsPage() {
           </div>
         )}
       </main>
+      {cartCount > 0 ? (
+        <aside className="fixed bottom-4 left-3 right-3 z-40 mx-auto max-w-md rounded-2xl border border-border bg-card p-4 shadow-[0_16px_45px_-18px_rgba(0,0,0,0.45)] sm:bottom-5 sm:left-auto sm:right-5">
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex items-center gap-2">
+              <span className="grid size-9 place-items-center rounded-xl bg-accent/10 text-accent">
+                <ShoppingBag className="size-5" />
+              </span>
+              <div>
+                <p className="text-sm font-bold text-foreground">Your cart</p>
+                <p className="text-xs text-muted-foreground">{cartCount} item{cartCount === 1 ? "" : "s"}</p>
+              </div>
+            </div>
+            <p className="text-lg font-extrabold text-accent">₹{cartTotal}</p>
+          </div>
+          <div className="mt-3 max-h-32 space-y-2 overflow-y-auto border-y border-border py-2">
+            {cartItems.map((item) => (
+              <div key={item.id} className="flex items-center justify-between gap-2 text-xs">
+                <span className="min-w-0 truncate text-foreground">{item.name}</span>
+                <span className="flex shrink-0 items-center gap-1">
+                  <button
+                    type="button"
+                    onClick={() => changeQuantity(item.id, -1)}
+                    aria-label={`Remove one ${item.name}`}
+                    className="grid size-6 place-items-center rounded-md border border-border text-muted-foreground hover:text-foreground"
+                  >
+                    <Minus className="size-3" />
+                  </button>
+                  <span className="w-5 text-center font-bold text-foreground">{item.quantity}</span>
+                  <button
+                    type="button"
+                    onClick={() => changeQuantity(item.id, 1)}
+                    aria-label={`Add one ${item.name}`}
+                    className="grid size-6 place-items-center rounded-md border border-border text-muted-foreground hover:text-foreground"
+                  >
+                    <Plus className="size-3" />
+                  </button>
+                </span>
+              </div>
+            ))}
+          </div>
+          <a
+            href={waCartLink(cartItems)}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-3 flex items-center justify-center rounded-xl bg-accent px-4 py-2.5 text-sm font-bold text-accent-foreground transition-transform hover:-translate-y-0.5"
+          >
+            Order cart on WhatsApp
+          </a>
+        </aside>
+      ) : null}
       <Footer />
     </div>
   );
