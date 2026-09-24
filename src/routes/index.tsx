@@ -183,7 +183,9 @@ function Index() {
                         <span className="grid size-7 sm:size-9 place-items-center rounded-lg sm:rounded-xl bg-[#5d3925]/10 text-[#5d3925] flex-shrink-0">
                           <Icon className="size-3.5 sm:size-4" />
                         </span>
-                        <p className="text-xs sm:text-sm font-semibold text-foreground">{item.label}</p>
+                        <p className="text-xs sm:text-sm font-semibold text-foreground">
+                          {item.label}
+                        </p>
                       </div>
                     </div>
                   );
@@ -196,14 +198,18 @@ function Index() {
                     <Clock3 className="size-3 sm:size-3.5" />
                     Opening hours
                   </div>
-                  <p className="mt-1.5 sm:mt-2 text-sm sm:text-lg font-extrabold text-foreground">{SHOP.hours}</p>
+                  <p className="mt-1.5 sm:mt-2 text-sm sm:text-lg font-extrabold text-foreground">
+                    {SHOP.hours}
+                  </p>
                 </div>
                 <div className="rounded-lg sm:rounded-2xl bg-[#f4e7d3] p-2.5 sm:p-3">
                   <div className="flex items-center gap-2 text-[10px] sm:text-xs font-bold uppercase tracking-wide text-[#7b5c3d]">
                     <MapPin className="size-3 sm:size-3.5" />
                     Visit us
                   </div>
-                  <p className="mt-1.5 sm:mt-2 text-sm sm:text-lg font-extrabold text-foreground line-clamp-2 sm:line-clamp-none">{SHOP.address}</p>
+                  <p className="mt-1.5 sm:mt-2 text-sm sm:text-lg font-extrabold text-foreground line-clamp-2 sm:line-clamp-none">
+                    {SHOP.address}
+                  </p>
                 </div>
               </div>
 
@@ -216,7 +222,9 @@ function Index() {
                     <p className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.16em] sm:tracking-[0.18em] text-[#7b5c3d]">
                       {fact.title}
                     </p>
-                    <p className="mt-1 text-xs sm:text-sm font-semibold text-foreground">{fact.value}</p>
+                    <p className="mt-1 text-xs sm:text-sm font-semibold text-foreground">
+                      {fact.value}
+                    </p>
                   </div>
                 ))}
               </div>
@@ -255,7 +263,9 @@ function Index() {
           <div className="mx-auto grid max-w-6xl grid-cols-2 gap-3 px-3 sm:gap-6 sm:px-4 sm:grid-cols-4">
             {shopStats.map((stat) => (
               <div key={stat.label} className="text-center">
-                <p className="font-display text-xl sm:text-2xl lg:text-3xl font-extrabold">{stat.value}</p>
+                <p className="font-display text-xl sm:text-2xl lg:text-3xl font-extrabold">
+                  {stat.value}
+                </p>
                 <p className="mt-1 text-[10px] sm:text-xs font-semibold uppercase tracking-wide text-[#fff0d6]/80">
                   {stat.label}
                 </p>
@@ -307,7 +317,9 @@ function Index() {
                       {c.count}
                     </span>
                   </div>
-                  <h3 className="mt-2 sm:mt-3 font-bold text-xs sm:text-base text-foreground">{c.name}</h3>
+                  <h3 className="mt-2 sm:mt-3 font-bold text-xs sm:text-base text-foreground">
+                    {c.name}
+                  </h3>
                   <p className="text-[10px] sm:text-xs text-muted-foreground">{c.nameHi}</p>
                   <div className="mt-2 sm:mt-4 flex items-center justify-between text-[9px] sm:text-xs font-semibold">
                     <span className="text-muted-foreground line-clamp-1">Browse full range</span>
@@ -331,7 +343,8 @@ function Index() {
                 </h2>
               </div>
               <p className="max-w-sm text-xs leading-5 text-muted-foreground sm:text-sm">
-                Pickup ke liye order ahead karein. Local delivery availability WhatsApp par confirm karein.
+                Pickup ke liye order ahead karein. Local delivery availability WhatsApp par confirm
+                karein.
               </p>
             </div>
 
