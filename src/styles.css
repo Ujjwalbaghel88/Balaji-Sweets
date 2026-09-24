@@ -152,13 +152,116 @@
 
   body {
     background-color: var(--color-background);
+    background-image:
+      radial-gradient(circle at 10% 0%, oklch(0.92 0.08 82 / 0.22), transparent 28rem),
+      radial-gradient(circle at 92% 18%, oklch(0.88 0.06 145 / 0.12), transparent 24rem),
+      linear-gradient(135deg, oklch(0.99 0.01 90 / 0.35) 25%, transparent 25%);
+    background-size:
+      auto,
+      auto,
+      7px 7px;
     color: var(--color-foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
   }
 
+  a,
+  button {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-ring);
+    outline-offset: 3px;
+  }
+
   ::selection {
     background: var(--color-primary);
     color: var(--color-primary-foreground);
+  }
+}
+
+@keyframes home-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes home-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(1deg);
+  }
+}
+
+.home-reveal {
+  animation: home-reveal 700ms both;
+}
+
+.home-reveal-delay-1 {
+  animation-delay: 100ms;
+}
+
+.home-reveal-delay-2 {
+  animation-delay: 180ms;
+}
+
+.home-reveal-delay-3 {
+  animation-delay: 260ms;
+}
+
+.home-float {
+  animation: home-float 6s ease-in-out infinite;
+}
+
+@keyframes card-shine {
+  from {
+    transform: translateX(-120%);
+  }
+  to {
+    transform: translateX(120%);
+  }
+}
+
+article,
+[class*="group overflow-hidden"] {
+  isolation: isolate;
+}
+
+article img,
+[class*="group overflow-hidden"] img {
+  filter: saturate(1.04) contrast(1.02);
+}
+
+button,
+a {
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .home-reveal,
+  .home-float {
+    animation: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
   }
 }
