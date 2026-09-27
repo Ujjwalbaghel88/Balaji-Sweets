@@ -116,8 +116,8 @@ function Index() {
           <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(217,179,122,0.22),transparent_34%),radial-gradient(circle_at_88%_20%,rgba(79,111,74,0.14),transparent_30%),linear-gradient(to_bottom,var(--color-background),color-mix(in_oklab,var(--color-secondary)_42%,var(--color-background)),var(--color-background))]" />
           <div className="pointer-events-none absolute inset-0 -z-10 opacity-35 [background-image:linear-gradient(rgba(93,57,37,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(93,57,37,0.06)_1px,transparent_1px)] [background-size:32px_32px] [mask-image:linear-gradient(to_bottom,black,transparent_72%)]" />
 
-          <div className="mx-auto grid min-h-[calc(82vh-4rem)] max-w-7xl items-center gap-8 px-4 py-10 sm:px-6 sm:py-14 md:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:py-20">
-            <div className="order-2 relative z-10 md:order-1 md:py-8">
+          <div className="mx-auto grid max-w-7xl items-center gap-8 px-4 py-0 sm:px-6 sm:py-2 md:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:py-3">
+            <div className="order-2 relative z-10 md:order-1 md:py-2">
               <div className="home-reveal inline-flex items-center gap-2 rounded-full border border-[#c8ab7f] bg-[#f5ead5]/95 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-[#5b3721] shadow-soft backdrop-blur sm:px-4 sm:py-2 sm:text-[11px]">
                 <Flame className="size-3 sm:size-3.5 text-[#5b3721]" />
                 Fresh bakery and daily essentials
@@ -230,7 +230,7 @@ function Index() {
               </div>
             </div>
 
-            <div className="home-reveal home-reveal-delay-2 order-1 relative z-10 mt-4 md:order-2 md:mt-0">
+            <div className="home-reveal home-reveal-delay-2 order-1 relative z-10 mt-0 md:order-2 md:mt-0">
               <div className="home-float relative mx-auto aspect-[4/5] max-w-[20rem] overflow-hidden rounded-[2rem] border-[6px] border-white bg-[#f9f1e1] shadow-[0_30px_80px_-30px_rgba(24,54,38,0.45)] ring-1 ring-[#d9d5c6] sm:max-w-[27rem] sm:rounded-[2.5rem]">
                 <VideoCarousel />
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-foreground/60 via-foreground/15 to-transparent" />
