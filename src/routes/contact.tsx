@@ -32,12 +32,12 @@ function ContactPage() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main className="mx-auto max-w-6xl px-4 py-10">
-        <h1 className="font-display text-3xl font-extrabold text-foreground">Contact & Location</h1>
+      <main className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16">
+        <h1 className="font-display text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl">Contact & Location</h1>
         <p className="mt-1 text-sm text-muted-foreground">हमसे संपर्क करें</p>
 
         <div className="mt-8 grid gap-6 lg:grid-cols-2">
-          <div className="rounded-2xl border border-border bg-card p-6 shadow-soft">
+          <div className="rounded-3xl border border-border/80 bg-card p-7 shadow-soft sm:p-9">
             <dl className="space-y-4 text-sm">
               <div>
                 <dt className="text-xs uppercase tracking-wide text-muted-foreground">Address</dt>

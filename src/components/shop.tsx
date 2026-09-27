@@ -4,17 +4,17 @@ import { SHOP, telLink, waLink, type Product } from "@/data/shop";
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-40 border-b border-primary/25 bg-foreground shadow-soft backdrop-blur">
+    <header className="sticky top-0 z-40 border-b border-border/80 bg-background/90 shadow-soft backdrop-blur-xl">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-2 px-3 py-2.5 sm:gap-3 sm:px-4 sm:py-3">
         <Link to="/" className="flex items-center gap-2 flex-shrink-0">
-          <span className="grid size-8 sm:size-9 place-items-center rounded-lg sm:rounded-xl bg-primary text-lg sm:text-lg">
+          <span className="grid size-8 sm:size-9 place-items-center rounded-xl bg-accent text-lg sm:text-lg shadow-soft">
             🏪
           </span>
           <span className="leading-tight hidden sm:block">
-            <span className="block text-xs sm:text-sm font-extrabold text-overlay-foreground">
+            <span className="block text-xs sm:text-sm font-extrabold text-foreground">
               Balaji Pan & Bakery
             </span>
-            <span className="block text-[9px] sm:text-[11px] text-overlay-foreground/65">
+            <span className="block text-[9px] sm:text-[11px] text-muted-foreground">
               {SHOP.nameHi}
             </span>
           </span>
@@ -22,15 +22,15 @@ export function Header() {
         <nav className="flex items-center gap-0.5 sm:gap-1 text-xs sm:text-sm font-medium">
           <Link
             to="/products"
-            className="rounded-lg px-2 py-1.5 sm:px-2.5 text-overlay-foreground/75 transition-colors hover:bg-card/10 hover:text-overlay-foreground"
-            activeProps={{ className: "bg-card/15 text-overlay-foreground" }}
+            className="rounded-lg px-2 py-1.5 sm:px-2.5 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+            activeProps={{ className: "bg-secondary text-foreground" }}
           >
             Products
           </Link>
           <Link
             to="/contact"
-            className="rounded-lg px-2 py-1.5 sm:px-2.5 text-overlay-foreground/75 transition-colors hover:bg-card/10 hover:text-overlay-foreground"
-            activeProps={{ className: "bg-card/15 text-overlay-foreground" }}
+            className="rounded-lg px-2 py-1.5 sm:px-2.5 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+            activeProps={{ className: "bg-secondary text-foreground" }}
           >
             Contact
           </Link>
@@ -151,16 +151,16 @@ export function ProductCard({ product, onAdd }: { product: Product; onAdd?: () =
           src={product.image}
           alt={product.name}
           loading="lazy"
-          className="h-32 w-full object-cover sm:h-36 lg:h-44"
+          className="h-36 w-full object-cover sm:h-44 lg:h-52"
         />
         {product.popular ? (
-          <span className="absolute left-2 top-2 rounded-full bg-primary px-1.5 py-0.5 text-[10px] sm:text-[11px] font-bold text-primary-foreground">
+          <span className="absolute left-2 top-2 rounded-full bg-white/90 px-2.5 py-1 text-[10px] sm:text-[11px] font-bold text-foreground shadow-sm backdrop-blur">
             ⭐ Popular
           </span>
         ) : null}
       </div>
-      <div className="p-2.5 sm:p-3">
-        <h3 className="text-xs sm:text-sm font-bold text-foreground line-clamp-2">
+      <div className="p-3.5 sm:p-4">
+        <h3 className="text-sm sm:text-base font-bold text-foreground line-clamp-2">
           {product.name}
         </h3>
         <p className="text-[10px] sm:text-xs text-muted-foreground">{product.nameHi}</p>
@@ -168,7 +168,7 @@ export function ProductCard({ product, onAdd }: { product: Product; onAdd?: () =
           {product.group}
         </p>
         <div className="mt-2 flex items-center justify-between gap-2">
-          <span className="text-sm sm:text-base font-extrabold text-accent">₹{product.price}</span>
+          <span className="text-base sm:text-lg font-extrabold text-accent">₹{product.price}</span>
           {onAdd ? (
             <button
               type="button"

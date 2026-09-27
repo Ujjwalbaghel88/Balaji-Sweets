@@ -116,18 +116,18 @@ function Index() {
           <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(217,179,122,0.22),transparent_34%),radial-gradient(circle_at_88%_20%,rgba(79,111,74,0.14),transparent_30%),linear-gradient(to_bottom,var(--color-background),color-mix(in_oklab,var(--color-secondary)_42%,var(--color-background)),var(--color-background))]" />
           <div className="pointer-events-none absolute inset-0 -z-10 opacity-35 [background-image:linear-gradient(rgba(93,57,37,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(93,57,37,0.06)_1px,transparent_1px)] [background-size:32px_32px] [mask-image:linear-gradient(to_bottom,black,transparent_72%)]" />
 
-          <div className="mx-auto grid min-h-[calc(82vh-4rem)] max-w-6xl items-center gap-4 px-3 py-4 sm:gap-6 sm:px-4 sm:py-6 md:items-start md:gap-8 md:grid-cols-[1.05fr_0.95fr] md:py-10">
-            <div className="order-2 relative z-10 md:order-1">
+          <div className="mx-auto grid min-h-[calc(82vh-4rem)] max-w-7xl items-center gap-8 px-4 py-10 sm:px-6 sm:py-14 md:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:py-20">
+            <div className="order-2 relative z-10 md:order-1 md:py-8">
               <div className="home-reveal inline-flex items-center gap-2 rounded-full border border-[#c8ab7f] bg-[#f5ead5]/95 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-[#5b3721] shadow-soft backdrop-blur sm:px-4 sm:py-2 sm:text-[11px]">
                 <Flame className="size-3 sm:size-3.5 text-[#5b3721]" />
                 Fresh bakery and daily essentials
               </div>
 
-              <h1 className="home-reveal home-reveal-delay-1 mt-3 max-w-2xl font-display text-2xl font-extrabold leading-tight tracking-tight text-foreground sm:mt-5 sm:text-3xl lg:text-5xl">
+              <h1 className="home-reveal home-reveal-delay-1 mt-3 max-w-2xl font-display text-4xl font-extrabold leading-[1.08] tracking-tight text-foreground sm:mt-5 sm:text-5xl lg:text-6xl">
                 A warm neighborhood stop for bakery, drinks, pan, and grocery essentials
               </h1>
 
-              <p className="home-reveal home-reveal-delay-2 mt-2 max-w-2xl text-xs leading-5 text-muted-foreground sm:mt-3 sm:text-sm sm:leading-6 lg:text-base lg:leading-7">
+              <p className="home-reveal home-reveal-delay-2 mt-2 max-w-2xl text-sm leading-6 text-muted-foreground sm:mt-4 sm:text-base sm:leading-7 lg:max-w-xl">
                 Fast service, fresh stock, and easy WhatsApp ordering from the heart of Main Market,
                 Bandol.
               </p>
@@ -230,8 +230,8 @@ function Index() {
               </div>
             </div>
 
-            <div className="home-reveal home-reveal-delay-2 order-1 relative z-10 mt-4 sm:mt-6 md:order-2 md:mt-8 md:-mt-10">
-              <div className="home-float relative mx-auto aspect-[3.65/5] max-w-[18rem] overflow-hidden rounded-[1.75rem] border-4 border-[#fff7ea] bg-[#f9f1e1] shadow-[0_24px_70px_-28px_rgba(93,57,37,0.55)] ring-1 ring-[#c8ab7f] sm:max-w-[25rem] sm:rounded-[2.5rem]">
+            <div className="home-reveal home-reveal-delay-2 order-1 relative z-10 mt-4 md:order-2 md:mt-0">
+              <div className="home-float relative mx-auto aspect-[4/5] max-w-[20rem] overflow-hidden rounded-[2rem] border-[6px] border-white bg-[#f9f1e1] shadow-[0_30px_80px_-30px_rgba(24,54,38,0.45)] ring-1 ring-[#d9d5c6] sm:max-w-[27rem] sm:rounded-[2.5rem]">
                 <VideoCarousel />
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-foreground/60 via-foreground/15 to-transparent" />
                 <div className="absolute left-2 right-2 top-2 sm:left-4 sm:right-4 sm:top-4 z-20 flex items-center justify-between gap-1">
@@ -274,7 +274,7 @@ function Index() {
           </div>
         </section>
 
-        <section className="mx-auto max-w-6xl px-3 sm:px-4 py-8 sm:py-14">
+        <section className="mx-auto max-w-7xl px-3 sm:px-4 py-8 sm:py-14">
           <div className="flex flex-col sm:flex-wrap sm:items-end sm:justify-between gap-3 sm:gap-4">
             <div>
               <p className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] sm:tracking-[0.22em] text-accent">
@@ -332,7 +332,7 @@ function Index() {
         </section>
 
         <section className="border-y border-[#dec8a0] bg-[#f5ead5] py-8 sm:py-10">
-          <div className="mx-auto max-w-6xl px-3 sm:px-4">
+          <div className="mx-auto max-w-7xl px-3 sm:px-4">
             <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
               <div>
                 <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#7b5c3d] sm:text-xs">
@@ -377,7 +377,7 @@ function Index() {
           </div>
         </section>
 
-        <section className="mx-auto max-w-6xl px-3 sm:px-4 pb-4 sm:pb-6">
+        <section className="mx-auto max-w-7xl px-3 sm:px-4 pb-4 sm:pb-6">
           <div className="grid gap-3 sm:gap-4 lg:grid-cols-[1.2fr_0.8fr]">
             <div className="p-0 sm:p-1">
               <div className="flex flex-wrap items-end justify-between gap-3">
@@ -439,7 +439,7 @@ function Index() {
         </section>
 
         <section className="bg-[#f6efe2] py-14">
-          <div className="mx-auto max-w-6xl px-4">
+          <div className="mx-auto max-w-7xl px-4">
             <div className="text-center">
               <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#5d3925]">
                 Loved locally
@@ -473,7 +473,7 @@ function Index() {
           </div>
         </section>
 
-        <section className="mx-auto max-w-6xl px-4 pb-4 pt-14">
+        <section className="mx-auto max-w-7xl px-4 pb-4 pt-14">
           <div className="rounded-[2rem] bg-[#5d3925] p-8 text-center text-[#fff6e8] shadow-glow sm:p-10">
             <p className="text-xs font-bold uppercase tracking-[0.24em] text-[#fff6e8]/75">
               Ready to order

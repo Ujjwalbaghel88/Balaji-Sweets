@@ -58,13 +58,13 @@ function ProductsPage() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main className="mx-auto max-w-6xl px-4 py-10">
-        <h1 className="font-display text-3xl font-extrabold text-foreground">All Products</h1>
+      <main className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16">
+        <h1 className="font-display text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl">All Products</h1>
         <p className="mt-1 text-sm text-muted-foreground">
           सभी प्रोडक्ट्स · prices per piece / pack
         </p>
 
-        <div className="relative mt-6 max-w-xl">
+        <div className="relative mt-7 max-w-2xl">
           <Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
           <input
             value={query}
@@ -85,14 +85,14 @@ function ProductsPage() {
           ) : null}
         </div>
 
-        <div className="mt-5 flex flex-wrap gap-2">
+        <div className="mt-5 flex flex-wrap gap-2.5">
           {[{ slug: "all", name: "All", emoji: "🛍️" }, ...categories].map((c) => (
             <button
               key={c.slug}
               type="button"
               onClick={() => setActive(c.slug)}
               className={
-                "rounded-full px-4 py-1.5 text-sm font-semibold transition-colors " +
+                "rounded-full px-4 py-2 text-sm font-semibold transition-all hover:-translate-y-0.5 " +
                 (active === c.slug
                   ? "bg-accent text-accent-foreground"
                   : "border border-border bg-card text-muted-foreground hover:text-foreground")
@@ -107,7 +107,7 @@ function ProductsPage() {
           {list.length} item{list.length === 1 ? "" : "s"} found
         </p>
         {list.length ? (
-          <div className="mt-4 grid grid-cols-2 gap-4 lg:grid-cols-4">
+          <div className="mt-4 grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-4">
             {list.map((p) => (
               <ProductCard key={p.id} product={p} onAdd={() => addToCart(p.id)} />
             ))}
