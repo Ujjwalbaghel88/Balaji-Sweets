@@ -1,5 +1,10 @@
 @import "tailwindcss" source(none);
 @source "../src";
+@plugin "flyonui" {
+  themes: light, dark, gourmet --default;
+}
+@import "flyonui/variants.css";
+@source "../node_modules/flyonui/flyonui.js";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
