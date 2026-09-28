@@ -147,7 +147,7 @@ function Index() {
 
       <main className="overflow-hidden">
         <section className="relative isolate">
-          <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(217,179,122,0.22),transparent_34%),radial-gradient(circle_at_88%_20%,rgba(79,111,74,0.14),transparent_30%),linear-gradient(to_bottom,var(--color-background),color-mix(in_oklab,var(--color-secondary)_42%,var(--color-background)),var(--color-background))]" />
+          <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(217,179,122,0.22),transparent_34%),radial-gradient(circle_at_88%_20%,rgba(160,105,66,0.12),transparent_30%),linear-gradient(to_bottom,var(--color-background),color-mix(in_oklab,var(--color-secondary)_42%,var(--color-background)),var(--color-background))]" />
           <div className="pointer-events-none absolute inset-0 -z-10 opacity-35 [background-image:linear-gradient(rgba(93,57,37,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(93,57,37,0.06)_1px,transparent_1px)] [background-size:32px_32px] [mask-image:linear-gradient(to_bottom,black,transparent_72%)]" />
 
           <div className="mx-auto grid max-w-7xl items-center gap-8 px-4 py-0 sm:px-6 sm:py-2 md:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:py-3">
@@ -265,7 +265,7 @@ function Index() {
             </div>
 
             <div className="home-reveal home-reveal-delay-2 order-1 relative z-10 mt-0 md:order-2 md:mt-0">
-              <div className="home-float relative mx-auto aspect-[4/5] max-w-[20rem] overflow-hidden rounded-[2rem] border-[6px] border-white bg-[#f9f1e1] shadow-[0_30px_80px_-30px_rgba(24,54,38,0.45)] ring-1 ring-[#d9d5c6] sm:max-w-[27rem] sm:rounded-[2.5rem]">
+              <div className="home-float relative mx-auto aspect-[4/5] max-w-[20rem] overflow-hidden rounded-[2rem] border-[6px] border-white bg-[#f9f1e1] shadow-[0_30px_80px_-30px_rgba(93,57,37,0.32)] ring-1 ring-[#d9d5c6] sm:max-w-[27rem] sm:rounded-[2.5rem]">
                 <VideoCarousel />
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-foreground/60 via-foreground/15 to-transparent" />
                 <div className="absolute left-2 right-2 top-2 sm:left-4 sm:right-4 sm:top-4 z-20 flex items-center justify-between gap-1">
@@ -320,7 +320,7 @@ function Index() {
               <div className="grid grid-cols-3 gap-2 sm:gap-3">
                 {[
                   { label: "Meetha mood", icon: Cookie, slug: "bakery", color: "bg-[#fff7ea]" },
-                  { label: "Thanda scene", icon: IceCreamBowl, slug: "drinks", color: "bg-[#edf3e8]" },
+                  { label: "Thanda scene", icon: IceCreamBowl, slug: "drinks", color: "bg-[#f4e7d3]" },
                   { label: "Fresh finish", icon: Leaf, slug: "pan", color: "bg-[#f7efe0]" },
                 ].map((mood) => {
                   const Icon = mood.icon;
@@ -359,9 +359,9 @@ function Index() {
               );
             })}
           </div>
-          <div className="mt-3 flex flex-wrap items-center justify-between gap-3 rounded-2xl bg-[#e9efdf] px-4 py-3 text-sm text-[#40533b]">
+          <div className="mt-3 flex flex-wrap items-center justify-between gap-3 rounded-2xl bg-[#f2e4ca] px-4 py-3 text-sm text-[#5d3925]">
             <p className="font-semibold"><Clock3 className="mr-2 inline size-4" />Roz khule: {SHOP.hours}</p>
-            <button type="button" onClick={() => setShowTodayNote((visible) => !visible)} className="rounded-full border border-[#819071]/40 bg-white/60 px-3 py-1.5 text-xs font-bold transition hover:bg-white">
+            <button type="button" onClick={() => setShowTodayNote((visible) => !visible)} className="rounded-full border border-[#c8ab7f]/60 bg-white/60 px-3 py-1.5 text-xs font-bold transition hover:bg-white">
               {showTodayNote ? "Hide note" : "Aaj ki tip ✨"}
             </button>
           </div>
@@ -553,7 +553,7 @@ function Index() {
         </section>
 
         <section className="mx-auto max-w-7xl px-4 py-10 sm:py-14">
-          <div className="relative overflow-hidden rounded-[2rem] bg-[#234535] p-5 text-[#fff7ea] shadow-glow sm:p-9">
+          <div className="relative overflow-hidden rounded-[2rem] bg-[#5d3925] p-5 text-[#fff7ea] shadow-glow sm:p-9">
             <div className="pointer-events-none absolute -right-12 -top-16 size-56 rounded-full border-[28px] border-white/5" />
             <div className="relative z-10 grid gap-7 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
               <div>
@@ -574,9 +574,9 @@ function Index() {
                     <button key={value} type="button" onClick={() => setTreatMood(value)} aria-pressed={treatMood === value} className={`rounded-2xl border p-2 text-center transition ${treatMood === value ? "border-[#5d3925] bg-[#f2e4ca] shadow-soft" : "border-[#dec8a0] hover:bg-[#fffaf1]"}`}><span className="block text-xl">{emoji}</span><span className="mt-1 block text-[10px] font-bold sm:text-xs">{label}</span></button>
                   ))}
                 </div>
-                <div className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-2xl bg-[#e9efdf] p-3">
-                  <div><p className="text-[10px] font-bold uppercase tracking-wide text-[#617052]">Aapka treat idea</p><p className="font-display font-extrabold">{currentTreat.emoji} {currentTreat.title} <span className="font-sans text-xs font-medium text-[#617052]">{treatAudience[treatFor]}</span></p></div>
-                  <a href={waLink(`${currentTreat.item} ${treatAudience[treatFor]} — please availability confirm karein`)} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-xl bg-[#248b55] px-4 py-2.5 text-xs font-bold text-white transition hover:brightness-110"><MessageCircle className="size-4" /> WhatsApp par poochhein</a>
+                <div className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-2xl bg-[#f2e4ca] p-3">
+                  <div><p className="text-[10px] font-bold uppercase tracking-wide text-[#7b5c3d]">Aapka treat idea</p><p className="font-display font-extrabold">{currentTreat.emoji} {currentTreat.title} <span className="font-sans text-xs font-medium text-[#7b5c3d]">{treatAudience[treatFor]}</span></p></div>
+                  <a href={waLink(`${currentTreat.item} ${treatAudience[treatFor]} — please availability confirm karein`)} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-xl bg-[#5d3925] px-4 py-2.5 text-xs font-bold text-white transition hover:brightness-110"><MessageCircle className="size-4" /> WhatsApp par poochhein</a>
                 </div>
               </div>
             </div>
@@ -671,7 +671,7 @@ function Index() {
 
       <Footer />
       <div className="fixed bottom-4 right-4 z-50 flex flex-col gap-2 sm:bottom-6 sm:right-6">
-        <a href={waLink()} target="_blank" rel="noreferrer" aria-label="Chat on WhatsApp" className="grid size-12 place-items-center rounded-full bg-[#248b55] text-white shadow-lg transition hover:scale-105"><MessageCircle className="size-5" /></a>
+        <a href={waLink()} target="_blank" rel="noreferrer" aria-label="Chat on WhatsApp" className="grid size-12 place-items-center rounded-full bg-[#5d3925] text-white shadow-lg transition hover:scale-105"><MessageCircle className="size-5" /></a>
         {showBackToTop && <button type="button" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} aria-label="Back to top" className="grid size-10 place-items-center rounded-full border border-[#c8ab7f] bg-[#fff7ea] text-[#5d3925] shadow-lg transition hover:-translate-y-1"><ArrowUp className="size-4" /></button>}
       </div>
     </div>
