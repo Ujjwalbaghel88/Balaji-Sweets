@@ -66,7 +66,8 @@ export const categories: Category[] = [
     nameHi: "पान कॉर्नर",
     emoji: "🍬",
     count: "40+ items",
-    image: "https://www.jagranimages.com/images/newimg/24062023/24_06_2023-paan_ke_totke_23450847.jpg",
+    image:
+      "https://www.jagranimages.com/images/newimg/24062023/24_06_2023-paan_ke_totke_23450847.jpg",
   },
   {
     slug: "grocery",
@@ -166,7 +167,8 @@ export const products: Product[] = [
     category: "drinks",
     price: 20,
     popular: true,
-    image: "https://www.mystore.in/s/62ea2c599d1398fa16dbae0a/67b381f9bbcbcceb9172eec6/8902579000370_1.jpg",
+    image:
+      "https://www.mystore.in/s/62ea2c599d1398fa16dbae0a/67b381f9bbcbcceb9172eec6/8902579000370_1.jpg",
   },
   {
     id: "cold-water",
@@ -185,7 +187,8 @@ export const products: Product[] = [
     category: "pan",
     price: 30,
     popular: true,
-    image: "https://www.jagranimages.com/images/newimg/24062023/24_06_2023-paan_ke_totke_23450847.jpg",
+    image:
+      "https://www.jagranimages.com/images/newimg/24062023/24_06_2023-paan_ke_totke_23450847.jpg",
   },
   {
     id: "mouth-freshener",
@@ -214,7 +217,8 @@ export const products: Product[] = [
     category: "grocery",
     price: 20,
     popular: true,
-    image: "https://images-cdn.ubuy.com.co/6354691bae794e4ca94ea3e5-kurkure-snack-masala-munch-green-chutney.jpg",
+    image:
+      "https://images-cdn.ubuy.com.co/6354691bae794e4ca94ea3e5-kurkure-snack-masala-munch-green-chutney.jpg",
   },
   {
     id: "lays",
@@ -224,7 +228,8 @@ export const products: Product[] = [
     category: "grocery",
     price: 20,
     popular: true,
-    image: "https://instamart-media-assets.swiggy.com/swiggy/image/upload/fl_lossy%2Cf_auto%2Cq_auto%2Cw_1200%2Ch_630/NI_CATALOG/IMAGES/ciw/2025/12/18/ba3837a2-9220-4b3e-b5ac-f1cde0e53248_JY83C9JAVY_MN_17122025.png",
+    image:
+      "https://instamart-media-assets.swiggy.com/swiggy/image/upload/fl_lossy%2Cf_auto%2Cq_auto%2Cw_1200%2Ch_630/NI_CATALOG/IMAGES/ciw/2025/12/18/ba3837a2-9220-4b3e-b5ac-f1cde0e53248_JY83C9JAVY_MN_17122025.png",
   },
   {
     id: "biscuit-pack",
