@@ -16,7 +16,7 @@ export function VideoCarousel() {
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
   useEffect(() => {
-    if (isPaused) return;
+    if (isPaused || document.hidden) return;
 
     const timer = window.setInterval(() => {
       setActiveIndex((index) => (index + 1) % videoHighlights.length);
@@ -24,6 +24,23 @@ export function VideoCarousel() {
 
     return () => window.clearInterval(timer);
   }, [isPaused]);
+
+  useEffect(() => {
+    const syncPlayback = () => {
+      const activeVideo = videoRefs.current[activeIndex];
+      if (!activeVideo) return;
+
+      if (document.hidden) {
+        activeVideo.pause();
+      } else {
+        activeVideo.muted = true;
+        void activeVideo.play().catch(() => undefined);
+      }
+    };
+
+    document.addEventListener("visibilitychange", syncPlayback);
+    return () => document.removeEventListener("visibilitychange", syncPlayback);
+  }, [activeIndex]);
 
   useEffect(() => {
     const nextIndex = (activeIndex + 1) % videoHighlights.length;
@@ -61,7 +78,7 @@ export function VideoCarousel() {
           ref={(element) => {
             videoRefs.current[index] = element;
           }}
-          className={`absolute inset-0 size-full object-cover transform-gpu will-change-[opacity] transition-opacity duration-1000 ease-in-out ${
+          className={`absolute inset-0 size-full object-cover transform-gpu will-change-[opacity] transition-opacity duration-700 ease-in-out motion-reduce:transition-none ${
             index === activeIndex ? "z-10 opacity-100" : "z-0 opacity-0"
           }`}
           src={assetUrl(src)}
@@ -88,6 +105,8 @@ export function VideoCarousel() {
       <button
         type="button"
         onClick={() => goTo(activeIndex - 1)}
+        onFocus={() => setIsPaused(true)}
+        onBlur={() => setIsPaused(false)}
         className="pointer-events-auto absolute left-4 top-1/2 z-30 grid size-10 -translate-y-1/2 place-items-center rounded-full border border-card/40 bg-card/20 text-overlay-foreground backdrop-blur-sm transition hover:bg-card/40"
         aria-label="Previous video"
       >
@@ -96,6 +115,8 @@ export function VideoCarousel() {
       <button
         type="button"
         onClick={() => goTo(activeIndex + 1)}
+        onFocus={() => setIsPaused(true)}
+        onBlur={() => setIsPaused(false)}
         className="pointer-events-auto absolute right-4 top-1/2 z-30 grid size-10 -translate-y-1/2 place-items-center rounded-full border border-card/40 bg-card/20 text-overlay-foreground backdrop-blur-sm transition hover:bg-card/40"
         aria-label="Next video"
       >
@@ -108,6 +129,8 @@ export function VideoCarousel() {
             key={src}
             type="button"
             onClick={() => goTo(index)}
+            onFocus={() => setIsPaused(true)}
+            onBlur={() => setIsPaused(false)}
             className={`h-2 rounded-full transition-all duration-300 ${
               index === activeIndex ? "w-8 bg-card" : "w-2 bg-card/50 hover:bg-card/80"
             }`}

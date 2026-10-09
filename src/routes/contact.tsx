@@ -33,7 +33,9 @@ function ContactPage() {
     <div className="min-h-screen bg-background">
       <Header />
       <main className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16">
-        <h1 className="font-display text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl">Contact & Location</h1>
+        <h1 className="font-display text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl">
+          Contact & Location
+        </h1>
         <p className="mt-1 text-sm text-muted-foreground">हमसे संपर्क करें</p>
 
         <div className="mt-8 grid gap-6 lg:grid-cols-2">
