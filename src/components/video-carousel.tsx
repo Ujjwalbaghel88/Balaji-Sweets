@@ -8,6 +8,7 @@ const videoHighlights = [
   "65692-515098526_medium.mp4",
 ];
 
+
 const assetUrl = (fileName: string) => `${import.meta.env.BASE_URL}${fileName}`;
 
 export function VideoCarousel() {
