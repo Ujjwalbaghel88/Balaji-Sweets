@@ -10,7 +10,6 @@ export const SHOP = {
   mapsUrl: "https://maps.app.goo.gl/QnYyra7REPgCbdpB7",
 };
 
-
 export function waLink(item?: string) {
   const base = "Namaste! Main Balaji Pan & Bakery Shop se order karna chahta/chahti hoon.";
   const text = item ? `${base} Item: ${item}` : base;

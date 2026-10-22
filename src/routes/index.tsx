@@ -131,7 +131,11 @@ function Index() {
     chill: { title: "Chilled break banta hai", item: "Cold drink aur quick snack", emoji: "🥤" },
     snack: { title: "Chhota snack, badi khushi", item: "Chips, biscuits ya patties", emoji: "🍟" },
   };
-  const treatAudience: Record<string, string> = { myself: "mere liye", friend: "dost ke liye", family: "family ke liye" };
+  const treatAudience: Record<string, string> = {
+    myself: "mere liye",
+    friend: "dost ke liye",
+    family: "family ke liye",
+  };
   const currentTreat = treatIdeas[treatMood];
 
   useEffect(() => {
@@ -313,20 +317,38 @@ function Index() {
             <div className="pointer-events-none absolute -right-8 -top-12 size-44 rounded-full border-[22px] border-[#e4c58f]/50 sm:size-56" />
             <div className="relative z-10 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#7b5c3d]">A little craving check</p>
-                <h2 className="mt-1 font-display text-2xl font-extrabold text-[#3f291c] sm:text-3xl">Aaj ka mood kya hai?</h2>
-                <p className="mt-1 text-sm text-[#745b43]">Pick your vibe, we’ll take you to the right shelf.</p>
+                <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#7b5c3d]">
+                  A little craving check
+                </p>
+                <h2 className="mt-1 font-display text-2xl font-extrabold text-[#3f291c] sm:text-3xl">
+                  Aaj ka mood kya hai?
+                </h2>
+                <p className="mt-1 text-sm text-[#745b43]">
+                  Pick your vibe, we’ll take you to the right shelf.
+                </p>
               </div>
               <div className="grid grid-cols-3 gap-2 sm:gap-3">
                 {[
                   { label: "Meetha mood", icon: Cookie, slug: "bakery", color: "bg-[#fff7ea]" },
-                  { label: "Thanda scene", icon: IceCreamBowl, slug: "drinks", color: "bg-[#f4e7d3]" },
+                  {
+                    label: "Thanda scene",
+                    icon: IceCreamBowl,
+                    slug: "drinks",
+                    color: "bg-[#f4e7d3]",
+                  },
                   { label: "Fresh finish", icon: Leaf, slug: "pan", color: "bg-[#f7efe0]" },
                 ].map((mood) => {
                   const Icon = mood.icon;
                   return (
-                    <Link key={mood.slug} to="/category/$slug" params={{ slug: mood.slug }} className={`group grid min-w-0 justify-items-center gap-2 rounded-2xl border border-[#d8bd91] ${mood.color} px-3 py-3 text-center text-[#5d3925] transition hover:-translate-y-1 hover:shadow-soft sm:min-w-28 sm:px-4 sm:py-4`}>
-                      <span className="grid size-10 place-items-center rounded-full bg-[#5d3925]/10 transition group-hover:rotate-[-8deg] group-hover:scale-110"><Icon className="size-5" /></span>
+                    <Link
+                      key={mood.slug}
+                      to="/category/$slug"
+                      params={{ slug: mood.slug }}
+                      className={`group grid min-w-0 justify-items-center gap-2 rounded-2xl border border-[#d8bd91] ${mood.color} px-3 py-3 text-center text-[#5d3925] transition hover:-translate-y-1 hover:shadow-soft sm:min-w-28 sm:px-4 sm:py-4`}
+                    >
+                      <span className="grid size-10 place-items-center rounded-full bg-[#5d3925]/10 transition group-hover:rotate-[-8deg] group-hover:scale-110">
+                        <Icon className="size-5" />
+                      </span>
                       <span className="text-[10px] font-bold sm:text-xs">{mood.label}</span>
                     </Link>
                   );
@@ -339,33 +361,81 @@ function Index() {
         <section className="mx-auto max-w-7xl px-4 pt-5 sm:pt-7">
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {[
-              { icon: ShoppingBasket, title: "Sab kuch paas mein", copy: "Bakery se daily grocery tak", href: "/products", label: "Shop categories" },
-              { icon: PartyPopper, title: "Celebration aa rahi?", copy: "Cake availability WhatsApp par poochhein", href: waLink("Birthday cake availability"), label: "Ask about cakes" },
-              { icon: MessageCircle, title: "Pehle se order bhejo", copy: "Pickup ke liye items ready karwao", href: waLink(), label: "Message us" },
-              { icon: Heart, title: "Local dukaan, apnapan", copy: "Bandol Main Market mein aapka swagat hai", href: SHOP.mapsUrl, label: "Find our shop" },
+              {
+                icon: ShoppingBasket,
+                title: "Sab kuch paas mein",
+                copy: "Bakery se daily grocery tak",
+                href: "/products",
+                label: "Shop categories",
+              },
+              {
+                icon: PartyPopper,
+                title: "Celebration aa rahi?",
+                copy: "Cake availability WhatsApp par poochhein",
+                href: waLink("Birthday cake availability"),
+                label: "Ask about cakes",
+              },
+              {
+                icon: MessageCircle,
+                title: "Pehle se order bhejo",
+                copy: "Pickup ke liye items ready karwao",
+                href: waLink(),
+                label: "Message us",
+              },
+              {
+                icon: Heart,
+                title: "Local dukaan, apnapan",
+                copy: "Bandol Main Market mein aapka swagat hai",
+                href: SHOP.mapsUrl,
+                label: "Find our shop",
+              },
             ].map((item) => {
               const Icon = item.icon;
               const external = item.href.startsWith("http");
               return (
-                <a key={item.title} href={item.href} target={external ? "_blank" : undefined} rel={external ? "noreferrer" : undefined} className="group rounded-2xl border border-[#dec8a0] bg-[#fffaf1] p-4 shadow-soft transition hover:-translate-y-1 hover:shadow-glow">
+                <a
+                  key={item.title}
+                  href={item.href}
+                  target={external ? "_blank" : undefined}
+                  rel={external ? "noreferrer" : undefined}
+                  className="group rounded-2xl border border-[#dec8a0] bg-[#fffaf1] p-4 shadow-soft transition hover:-translate-y-1 hover:shadow-glow"
+                >
                   <div className="flex items-start justify-between gap-3">
-                    <span className="grid size-10 place-items-center rounded-xl bg-[#5d3925]/10 text-[#5d3925]"><Icon className="size-5" /></span>
+                    <span className="grid size-10 place-items-center rounded-xl bg-[#5d3925]/10 text-[#5d3925]">
+                      <Icon className="size-5" />
+                    </span>
                     <ArrowRight className="mt-1 size-4 text-[#987b58] transition group-hover:translate-x-1" />
                   </div>
-                  <h3 className="mt-3 font-display text-lg font-extrabold text-[#432d1f]">{item.title}</h3>
+                  <h3 className="mt-3 font-display text-lg font-extrabold text-[#432d1f]">
+                    {item.title}
+                  </h3>
                   <p className="mt-1 text-xs leading-5 text-muted-foreground">{item.copy}</p>
-                  <span className="mt-3 inline-block text-xs font-bold text-[#5d3925]">{item.label} →</span>
+                  <span className="mt-3 inline-block text-xs font-bold text-[#5d3925]">
+                    {item.label} →
+                  </span>
                 </a>
               );
             })}
           </div>
           <div className="mt-3 flex flex-wrap items-center justify-between gap-3 rounded-2xl bg-[#f2e4ca] px-4 py-3 text-sm text-[#5d3925]">
-            <p className="font-semibold"><Clock3 className="mr-2 inline size-4" />Roz khule: {SHOP.hours}</p>
-            <button type="button" onClick={() => setShowTodayNote((visible) => !visible)} className="rounded-full border border-[#c8ab7f]/60 bg-white/60 px-3 py-1.5 text-xs font-bold transition hover:bg-white">
+            <p className="font-semibold">
+              <Clock3 className="mr-2 inline size-4" />
+              Roz khule: {SHOP.hours}
+            </p>
+            <button
+              type="button"
+              onClick={() => setShowTodayNote((visible) => !visible)}
+              className="rounded-full border border-[#c8ab7f]/60 bg-white/60 px-3 py-1.5 text-xs font-bold transition hover:bg-white"
+            >
               {showTodayNote ? "Hide note" : "Aaj ki tip ✨"}
             </button>
           </div>
-          {showTodayNote && <p className="mt-2 rounded-xl border border-[#dec8a0] bg-[#fff7ea] px-4 py-3 text-sm text-[#5d3925]">Cake ya bakery item ke liye aane se pehle WhatsApp par availability poochh lo—pickup aur easy ho jayega.</p>}
+          {showTodayNote && (
+            <p className="mt-2 rounded-xl border border-[#dec8a0] bg-[#fff7ea] px-4 py-3 text-sm text-[#5d3925]">
+              Cake ya bakery item ke liye aane se pehle WhatsApp par availability poochh lo—pickup
+              aur easy ho jayega.
+            </p>
+          )}
         </section>
 
         <section className="mx-auto max-w-7xl px-3 sm:px-4 py-8 sm:py-14">
@@ -494,15 +564,42 @@ function Index() {
 
               <div className="mt-4 flex flex-col gap-3 rounded-2xl border border-[#d8bd91] bg-[#fff7ea] p-4 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-center gap-3">
-                  <span className="grid size-10 place-items-center rounded-full bg-[#5d3925] text-[#fff6e8]"><WandSparkles className="size-5" /></span>
+                  <span className="grid size-10 place-items-center rounded-full bg-[#5d3925] text-[#fff6e8]">
+                    <WandSparkles className="size-5" />
+                  </span>
                   <div>
-                    <p className="text-xs font-bold uppercase tracking-wide text-[#7b5c3d]">Aaj ka surprise pick</p>
-                    <p className="font-display text-lg font-extrabold text-[#432d1f]">{popular[surpriseIndex]?.name ?? "Kuch tasty try karo"}</p>
+                    <p className="text-xs font-bold uppercase tracking-wide text-[#7b5c3d]">
+                      Aaj ka surprise pick
+                    </p>
+                    <p className="font-display text-lg font-extrabold text-[#432d1f]">
+                      {popular[surpriseIndex]?.name ?? "Kuch tasty try karo"}
+                    </p>
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <button type="button" onClick={() => setSurpriseIndex((index) => (index + 1 + Math.floor(Math.random() * (popular.length - 1))) % popular.length)} className="inline-flex items-center gap-2 rounded-xl border border-[#c8ab7f] px-3 py-2 text-xs font-bold text-[#5d3925] hover:bg-[#f2e4ca]"><Shuffle className="size-4" /> Surprise me</button>
-                  {popular[surpriseIndex] && <a href={waLink(popular[surpriseIndex].name)} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-xl bg-[#5d3925] px-3 py-2 text-xs font-bold text-[#fff6e8]">Ask on WhatsApp <ArrowRight className="size-4" /></a>}
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setSurpriseIndex(
+                        (index) =>
+                          (index + 1 + Math.floor(Math.random() * (popular.length - 1))) %
+                          popular.length,
+                      )
+                    }
+                    className="inline-flex items-center gap-2 rounded-xl border border-[#c8ab7f] px-3 py-2 text-xs font-bold text-[#5d3925] hover:bg-[#f2e4ca]"
+                  >
+                    <Shuffle className="size-4" /> Surprise me
+                  </button>
+                  {popular[surpriseIndex] && (
+                    <a
+                      href={waLink(popular[surpriseIndex].name)}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-2 rounded-xl bg-[#5d3925] px-3 py-2 text-xs font-bold text-[#fff6e8]"
+                    >
+                      Ask on WhatsApp <ArrowRight className="size-4" />
+                    </a>
+                  )}
                 </div>
               </div>
 
@@ -510,13 +607,32 @@ function Index() {
                 {popular.map((p) => (
                   <div key={p.id} className="min-w-0">
                     <ProductCard product={p} />
-                    <button type="button" onClick={() => setSavedItems((items) => items.includes(p.id) ? items.filter((id) => id !== p.id) : [...items, p.id])} aria-pressed={savedItems.includes(p.id)} className="mt-2 inline-flex items-center gap-1.5 rounded-full border border-[#dec8a0] bg-[#fffaf1] px-3 py-1.5 text-xs font-bold text-[#5d3925] transition hover:bg-[#f5ead5]">
-                      <Heart className={`size-3.5 ${savedItems.includes(p.id) ? "fill-current" : ""}`} /> {savedItems.includes(p.id) ? "Saved" : "Save for later"}
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setSavedItems((items) =>
+                          items.includes(p.id)
+                            ? items.filter((id) => id !== p.id)
+                            : [...items, p.id],
+                        )
+                      }
+                      aria-pressed={savedItems.includes(p.id)}
+                      className="mt-2 inline-flex items-center gap-1.5 rounded-full border border-[#dec8a0] bg-[#fffaf1] px-3 py-1.5 text-xs font-bold text-[#5d3925] transition hover:bg-[#f5ead5]"
+                    >
+                      <Heart
+                        className={`size-3.5 ${savedItems.includes(p.id) ? "fill-current" : ""}`}
+                      />{" "}
+                      {savedItems.includes(p.id) ? "Saved" : "Save for later"}
                     </button>
                   </div>
                 ))}
               </div>
-              {savedItems.length > 0 && <p className="mt-3 text-xs font-semibold text-[#7b5c3d]">{savedItems.length} favorite{savedItems.length > 1 ? "s" : ""} saved for this visit ♥</p>}
+              {savedItems.length > 0 && (
+                <p className="mt-3 text-xs font-semibold text-[#7b5c3d]">
+                  {savedItems.length} favorite{savedItems.length > 1 ? "s" : ""} saved for this
+                  visit ♥
+                </p>
+              )}
             </div>
 
             <div className="grid gap-4">
@@ -557,26 +673,81 @@ function Index() {
             <div className="pointer-events-none absolute -right-12 -top-16 size-56 rounded-full border-[28px] border-white/5" />
             <div className="relative z-10 grid gap-7 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
               <div>
-                <p className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-[#e6c993]"><Gift className="size-4" /> Make it a little special</p>
-                <h2 className="mt-2 font-display text-3xl font-extrabold sm:text-4xl">Apna treat moment banao</h2>
-                <p className="mt-2 max-w-md text-sm leading-6 text-white/75">Bas mood chuno—hum aapke liye ek chhota sa treat idea taiyaar kar denge. Phir WhatsApp par availability poochh lena.</p>
+                <p className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-[#e6c993]">
+                  <Gift className="size-4" /> Make it a little special
+                </p>
+                <h2 className="mt-2 font-display text-3xl font-extrabold sm:text-4xl">
+                  Apna treat moment banao
+                </h2>
+                <p className="mt-2 max-w-md text-sm leading-6 text-white/75">
+                  Bas mood chuno—hum aapke liye ek chhota sa treat idea taiyaar kar denge. Phir
+                  WhatsApp par availability poochh lena.
+                </p>
               </div>
               <div className="rounded-3xl bg-[#fff7ea] p-4 text-[#432d1f] sm:p-6">
-                <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#7b5c3d]">Treat kiske liye?</p>
+                <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#7b5c3d]">
+                  Treat kiske liye?
+                </p>
                 <div className="mt-2 flex flex-wrap gap-2">
-                  {[ ["myself", "Mere liye"], ["friend", "Dost ke liye"], ["family", "Family ke liye"] ].map(([value, label]) => (
-                    <button key={value} type="button" onClick={() => setTreatFor(value)} aria-pressed={treatFor === value} className={`rounded-full border px-3 py-1.5 text-xs font-bold transition ${treatFor === value ? "border-[#5d3925] bg-[#5d3925] text-white" : "border-[#dec8a0] hover:bg-[#f5ead5]"}`}>{label}</button>
+                  {[
+                    ["myself", "Mere liye"],
+                    ["friend", "Dost ke liye"],
+                    ["family", "Family ke liye"],
+                  ].map(([value, label]) => (
+                    <button
+                      key={value}
+                      type="button"
+                      onClick={() => setTreatFor(value)}
+                      aria-pressed={treatFor === value}
+                      className={`rounded-full border px-3 py-1.5 text-xs font-bold transition ${treatFor === value ? "border-[#5d3925] bg-[#5d3925] text-white" : "border-[#dec8a0] hover:bg-[#f5ead5]"}`}
+                    >
+                      {label}
+                    </button>
                   ))}
                 </div>
-                <p className="mt-4 text-xs font-bold uppercase tracking-[0.16em] text-[#7b5c3d]">Aaj ka mood</p>
+                <p className="mt-4 text-xs font-bold uppercase tracking-[0.16em] text-[#7b5c3d]">
+                  Aaj ka mood
+                </p>
                 <div className="mt-2 grid grid-cols-3 gap-2">
-                  {[ ["sweet", "Meetha", "🍰"], ["chill", "Chilled", "🥤"], ["snack", "Snack time", "🍟"] ].map(([value, label, emoji]) => (
-                    <button key={value} type="button" onClick={() => setTreatMood(value)} aria-pressed={treatMood === value} className={`rounded-2xl border p-2 text-center transition ${treatMood === value ? "border-[#5d3925] bg-[#f2e4ca] shadow-soft" : "border-[#dec8a0] hover:bg-[#fffaf1]"}`}><span className="block text-xl">{emoji}</span><span className="mt-1 block text-[10px] font-bold sm:text-xs">{label}</span></button>
+                  {[
+                    ["sweet", "Meetha", "🍰"],
+                    ["chill", "Chilled", "🥤"],
+                    ["snack", "Snack time", "🍟"],
+                  ].map(([value, label, emoji]) => (
+                    <button
+                      key={value}
+                      type="button"
+                      onClick={() => setTreatMood(value)}
+                      aria-pressed={treatMood === value}
+                      className={`rounded-2xl border p-2 text-center transition ${treatMood === value ? "border-[#5d3925] bg-[#f2e4ca] shadow-soft" : "border-[#dec8a0] hover:bg-[#fffaf1]"}`}
+                    >
+                      <span className="block text-xl">{emoji}</span>
+                      <span className="mt-1 block text-[10px] font-bold sm:text-xs">{label}</span>
+                    </button>
                   ))}
                 </div>
                 <div className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-2xl bg-[#f2e4ca] p-3">
-                  <div><p className="text-[10px] font-bold uppercase tracking-wide text-[#7b5c3d]">Aapka treat idea</p><p className="font-display font-extrabold">{currentTreat.emoji} {currentTreat.title} <span className="font-sans text-xs font-medium text-[#7b5c3d]">{treatAudience[treatFor]}</span></p></div>
-                  <a href={waLink(`${currentTreat.item} ${treatAudience[treatFor]} — please availability confirm karein`)} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-xl bg-[#5d3925] px-4 py-2.5 text-xs font-bold text-white transition hover:brightness-110"><MessageCircle className="size-4" /> WhatsApp par poochhein</a>
+                  <div>
+                    <p className="text-[10px] font-bold uppercase tracking-wide text-[#7b5c3d]">
+                      Aapka treat idea
+                    </p>
+                    <p className="font-display font-extrabold">
+                      {currentTreat.emoji} {currentTreat.title}{" "}
+                      <span className="font-sans text-xs font-medium text-[#7b5c3d]">
+                        {treatAudience[treatFor]}
+                      </span>
+                    </p>
+                  </div>
+                  <a
+                    href={waLink(
+                      `${currentTreat.item} ${treatAudience[treatFor]} — please availability confirm karein`,
+                    )}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 rounded-xl bg-[#5d3925] px-4 py-2.5 text-xs font-bold text-white transition hover:brightness-110"
+                  >
+                    <MessageCircle className="size-4" /> WhatsApp par poochhein
+                  </a>
                 </div>
               </div>
             </div>
@@ -671,8 +842,25 @@ function Index() {
 
       <Footer />
       <div className="fixed bottom-4 right-4 z-50 flex flex-col gap-2 sm:bottom-6 sm:right-6">
-        <a href={waLink()} target="_blank" rel="noreferrer" aria-label="Chat on WhatsApp" className="grid size-12 place-items-center rounded-full bg-[#5d3925] text-white shadow-lg transition hover:scale-105"><MessageCircle className="size-5" /></a>
-        {showBackToTop && <button type="button" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} aria-label="Back to top" className="grid size-10 place-items-center rounded-full border border-[#c8ab7f] bg-[#fff7ea] text-[#5d3925] shadow-lg transition hover:-translate-y-1"><ArrowUp className="size-4" /></button>}
+        <a
+          href={waLink()}
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Chat on WhatsApp"
+          className="grid size-12 place-items-center rounded-full bg-[#5d3925] text-white shadow-lg transition hover:scale-105"
+        >
+          <MessageCircle className="size-5" />
+        </a>
+        {showBackToTop && (
+          <button
+            type="button"
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            aria-label="Back to top"
+            className="grid size-10 place-items-center rounded-full border border-[#c8ab7f] bg-[#fff7ea] text-[#5d3925] shadow-lg transition hover:-translate-y-1"
+          >
+            <ArrowUp className="size-4" />
+          </button>
+        )}
       </div>
     </div>
   );

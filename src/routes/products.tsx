@@ -59,7 +59,9 @@ function ProductsPage() {
     <div className="min-h-screen bg-background">
       <Header />
       <main className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16">
-        <h1 className="font-display text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl">All Products</h1>
+        <h1 className="font-display text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl">
+          All Products
+        </h1>
         <p className="mt-1 text-sm text-muted-foreground">
           सभी प्रोडक्ट्स · prices per piece / pack
         </p>
