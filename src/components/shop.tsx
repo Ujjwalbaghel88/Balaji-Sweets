@@ -1,8 +1,53 @@
 import { Link } from "@tanstack/react-router";
-import { MessageCircle } from "lucide-react";
+import { Github, Instagram, Languages, MessageCircle, Moon, Sun } from "lucide-react";
+import { useEffect, useState } from "react";
 import { SHOP, telLink, waLink, type Product } from "@/data/shop";
 
+export function useLanguage() {
+  const [language, setLanguage] = useState<"en" | "hi">("en");
+
+  useEffect(() => {
+    const syncLanguage = () => {
+      const savedLanguage = window.localStorage.getItem("balaji-language");
+      const nextLanguage = savedLanguage === "hi" ? "hi" : "en";
+      document.documentElement.lang = nextLanguage;
+      setLanguage(nextLanguage);
+    };
+    syncLanguage();
+    window.addEventListener("balaji-language-change", syncLanguage);
+    return () => window.removeEventListener("balaji-language-change", syncLanguage);
+  }, []);
+
+  const toggleLanguage = () => {
+    const nextLanguage = language === "en" ? "hi" : "en";
+    document.documentElement.lang = nextLanguage;
+    window.localStorage.setItem("balaji-language", nextLanguage);
+    setLanguage(nextLanguage);
+    window.dispatchEvent(new Event("balaji-language-change"));
+  };
+
+  return { language, toggleLanguage };
+}
+
 export function Header() {
+  const [isDark, setIsDark] = useState(false);
+  const { language, toggleLanguage } = useLanguage();
+
+  useEffect(() => {
+    const savedTheme = window.localStorage.getItem("balaji-theme");
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const dark = savedTheme ? savedTheme === "dark" : prefersDark;
+    document.documentElement.classList.toggle("dark", dark);
+    setIsDark(dark);
+  }, []);
+
+  const toggleTheme = () => {
+    const nextIsDark = !isDark;
+    document.documentElement.classList.toggle("dark", nextIsDark);
+    window.localStorage.setItem("balaji-theme", nextIsDark ? "dark" : "light");
+    setIsDark(nextIsDark);
+  };
+
   return (
     <header className="sticky top-0 z-40 border-b border-border/80 bg-background/90 shadow-soft backdrop-blur-xl">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-2 px-3 py-2.5 sm:gap-3 sm:px-4 sm:py-3">
@@ -19,20 +64,20 @@ export function Header() {
             </span>
           </span>
         </Link>
-        <nav className="flex items-center gap-0.5 sm:gap-1 text-xs sm:text-sm font-medium">
+        <nav className="flex items-center gap-0.5 text-xs font-medium sm:gap-1 sm:text-sm">
           <Link
             to="/products"
             className="rounded-lg px-2 py-1.5 sm:px-2.5 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
             activeProps={{ className: "bg-secondary text-foreground" }}
           >
-            Products
+            {language === "en" ? "Products" : "उत्पाद"}
           </Link>
           <Link
             to="/contact"
             className="rounded-lg px-2 py-1.5 sm:px-2.5 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
             activeProps={{ className: "bg-secondary text-foreground" }}
           >
-            Contact
+            {language === "en" ? "Contact" : "संपर्क"}
           </Link>
           <a
             href={waLink()}
@@ -40,8 +85,25 @@ export function Header() {
             rel="noreferrer"
             className="ml-1 hidden rounded-lg bg-accent px-2.5 py-1.5 sm:px-3 text-xs sm:text-sm text-accent-foreground shadow-soft transition-transform hover:-translate-y-0.5 sm:block"
           >
-            WhatsApp
+            {language === "en" ? "WhatsApp" : "व्हाट्सऐप"}
           </a>
+          <button
+            type="button"
+            onClick={toggleTheme}
+            aria-label={`Switch to ${isDark ? "light" : "dark"} mode`}
+            title={`Switch to ${isDark ? "light" : "dark"} mode`}
+            className="ml-1 grid size-9 shrink-0 place-items-center rounded-lg border border-border bg-card text-foreground transition-colors hover:bg-secondary"
+          >
+            {isDark ? <Sun className="size-4" /> : <Moon className="size-4" />}
+          </button>
+          <button
+            type="button"
+            onClick={toggleLanguage}
+            aria-label={language === "en" ? "Switch language to Hindi" : "Switch language to English"}
+            className="ml-1 inline-flex h-9 shrink-0 items-center gap-1 rounded-lg border border-border bg-card px-2 text-xs font-bold text-foreground transition-colors hover:bg-secondary"
+          >
+            <Languages className="size-3.5" /> {language === "en" ? "हि" : "EN"}
+          </button>
         </nav>
       </div>
     </header>
@@ -133,6 +195,21 @@ export function Footer() {
             >
               Location
             </a>
+            <div className="flex items-center justify-center gap-3 pt-2" aria-label="Social links">
+              <a href={waLink()} target="_blank" rel="noreferrer" aria-label="WhatsApp" className="grid size-9 place-items-center rounded-full border border-border text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground">
+                <MessageCircle className="size-4" />
+              </a>
+              {import.meta.env.VITE_INSTAGRAM_URL && (
+                <a href={import.meta.env.VITE_INSTAGRAM_URL} target="_blank" rel="noreferrer" aria-label="Instagram" className="grid size-9 place-items-center rounded-full border border-border text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground">
+                  <Instagram className="size-4" />
+                </a>
+              )}
+              {import.meta.env.VITE_GITHUB_URL && (
+                <a href={import.meta.env.VITE_GITHUB_URL} target="_blank" rel="noreferrer" aria-label="GitHub" className="grid size-9 place-items-center rounded-full border border-border text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground">
+                  <Github className="size-4" />
+                </a>
+              )}
+            </div>
           </div>
         </div>
         <p className="border-t border-border py-4 text-center text-xs text-muted-foreground">
