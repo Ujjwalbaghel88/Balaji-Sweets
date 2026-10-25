@@ -21,11 +21,28 @@ import {
   Shuffle,
   WandSparkles,
   Gift,
+  ChevronDown,
 } from "lucide-react";
 import { useEffect, useState } from "react";
-import { Footer, Header, ProductCard } from "@/components/shop";
+import { Footer, Header, ProductCard, useLanguage } from "@/components/shop";
 import { VideoCarousel } from "@/components/video-carousel";
 import { SHOP, categories, popular, telLink, waLink } from "@/data/shop";
+import { Slider } from "@/components/ui/slider";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Personalization } from "@/components/personalization";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -119,6 +136,7 @@ const customerNotes = [
 ];
 
 function Index() {
+  const { language } = useLanguage();
   const [showTodayNote, setShowTodayNote] = useState(false);
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [surpriseIndex, setSurpriseIndex] = useState(0);
@@ -145,11 +163,96 @@ function Index() {
     return () => window.removeEventListener("scroll", updateScroll);
   }, []);
 
+  useEffect(() => {
+    const elements = document.querySelectorAll<HTMLElement>("main > section");
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      }),
+      { threshold: 0.08 },
+    );
+    elements.forEach((element) => {
+      element.classList.add("scroll-reveal");
+      observer.observe(element);
+    });
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
 
       <main className="overflow-hidden">
+        <section className="mx-auto max-w-7xl px-4 pt-5 sm:pt-8">
+          <div className="grid gap-4 rounded-3xl border border-border bg-card p-4 shadow-soft sm:gap-6 sm:p-6 lg:grid-cols-[1fr_auto] lg:items-center">
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-accent sm:text-xs">
+                Reusable UI · responsive by design
+              </p>
+              <h2 className="mt-1 font-display text-xl font-extrabold text-foreground sm:text-2xl">
+                {language === "en" ? "A few helpful shop shortcuts" : "दुकान के आसान विकल्प"}
+              </h2>
+              <p className="mt-1 text-xs leading-5 text-muted-foreground sm:text-sm">
+                {language === "en"
+                  ? "Browse a category, explore this week’s picks, or tune the product photo size."
+                  : "श्रेणी चुनें, लोकप्रिय उत्पाद देखें या तस्वीर का आकार बदलें।"}
+              </p>
+            </div>
+            <div className="flex flex-wrap items-center gap-2">
+              <DropdownMenu>
+                <DropdownMenuTrigger className="inline-flex h-10 items-center gap-2 rounded-xl border border-border bg-background px-3 text-sm font-semibold text-foreground transition-colors hover:bg-secondary">
+                  {language === "en" ? "Browse categories" : "श्रेणियाँ देखें"} <ChevronDown className="size-4" />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="start">
+                  {categories.map((category) => (
+                    <DropdownMenuItem key={category.slug} asChild>
+                      <Link to="/category/$slug" params={{ slug: category.slug }}>
+                        {category.name}
+                      </Link>
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+              <Dialog>
+                <DialogTrigger className="inline-flex h-10 items-center rounded-xl bg-accent px-4 text-sm font-bold text-accent-foreground shadow-soft transition-transform hover:-translate-y-0.5">
+                  {language === "en" ? "This week’s picks" : "इस हफ़्ते के पसंदीदा"}
+                </DialogTrigger>
+                <DialogContent className="max-h-[85vh] overflow-y-auto sm:max-w-2xl">
+                  <DialogHeader>
+                    <DialogTitle>Popular at Balaji</DialogTitle>
+                    <DialogDescription>
+                      A few customer favorites. Message us to check what’s fresh today.
+                    </DialogDescription>
+                  </DialogHeader>
+                  <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+                    {popular.slice(0, 6).map((product) => (
+                      <ProductCard key={product.id} product={product} />
+                    ))}
+                  </div>
+                </DialogContent>
+              </Dialog>
+            </div>
+            <div className="flex items-center gap-4 border-t border-border pt-4 lg:col-span-2 lg:max-w-md">
+              <label htmlFor="photo-size" className="shrink-0 text-xs font-semibold text-foreground">
+                {language === "en" ? "Photo size" : "तस्वीर का आकार"}
+              </label>
+              <Slider
+                id="photo-size"
+                aria-label="Product photo size"
+                defaultValue={[50]}
+                max={100}
+                step={10}
+                className="max-w-48"
+              />
+              <span className="text-xs text-muted-foreground">Compact ↔ Large</span>
+            </div>
+          </div>
+        </section>
+
         <section className="relative isolate">
           <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(217,179,122,0.22),transparent_34%),radial-gradient(circle_at_88%_20%,rgba(160,105,66,0.12),transparent_30%),linear-gradient(to_bottom,var(--color-background),color-mix(in_oklab,var(--color-secondary)_42%,var(--color-background)),var(--color-background))]" />
           <div className="pointer-events-none absolute inset-0 -z-10 opacity-35 [background-image:linear-gradient(rgba(93,57,37,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(93,57,37,0.06)_1px,transparent_1px)] [background-size:32px_32px] [mask-image:linear-gradient(to_bottom,black,transparent_72%)]" />
@@ -215,7 +318,7 @@ function Index() {
                   return (
                     <div
                       key={item.label}
-                      className="rounded-lg sm:rounded-2xl border border-[#dec8a0] bg-[#fff7ea]/95 p-2.5 sm:p-3 shadow-soft transition-transform duration-300 hover:-translate-y-1"
+                      className="dark-readable rounded-lg sm:rounded-2xl border border-[#dec8a0] bg-[#fff7ea]/95 p-2.5 sm:p-3 shadow-soft transition-transform duration-300 hover:-translate-y-1"
                     >
                       <div className="flex items-center gap-2 sm:gap-3">
                         <span className="grid size-7 sm:size-9 place-items-center rounded-lg sm:rounded-xl bg-[#5d3925]/10 text-[#5d3925] flex-shrink-0">
@@ -230,7 +333,7 @@ function Index() {
                 })}
               </div>
 
-              <div className="mt-3 grid gap-2 rounded-lg sm:rounded-[1.75rem] border border-[#dec8a0] bg-[#fff7ea]/95 p-3 sm:gap-3 sm:p-4 shadow-soft sm:grid-cols-2">
+              <div className="dark-readable mt-3 grid gap-2 rounded-lg sm:rounded-[1.75rem] border border-[#dec8a0] bg-[#fff7ea]/95 p-3 sm:gap-3 sm:p-4 shadow-soft sm:grid-cols-2">
                 <div className="rounded-lg sm:rounded-2xl bg-[#f4e7d3] p-2.5 sm:p-3">
                   <div className="flex items-center gap-2 text-[10px] sm:text-xs font-bold uppercase tracking-wide text-[#7b5c3d]">
                     <Clock3 className="size-3 sm:size-3.5" />
@@ -255,7 +358,7 @@ function Index() {
                 {quickFacts.map((fact) => (
                   <div
                     key={fact.title}
-                    className="rounded-lg sm:rounded-2xl border border-[#dec8a0] bg-[#f5ead5]/80 p-2.5 sm:p-3 shadow-soft"
+                    className="dark-readable rounded-lg sm:rounded-2xl border border-[#dec8a0] bg-[#f5ead5]/80 p-2.5 sm:p-3 shadow-soft"
                   >
                     <p className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.16em] sm:tracking-[0.18em] text-[#7b5c3d]">
                       {fact.title}
@@ -313,7 +416,7 @@ function Index() {
         </section>
 
         <section className="mx-auto max-w-7xl px-4 pt-8 sm:pt-12">
-          <div className="relative overflow-hidden rounded-[2rem] border border-[#d8bd91] bg-[#f2e4ca] p-5 shadow-soft sm:p-8">
+          <div className="dark-readable relative overflow-hidden rounded-[2rem] border border-[#d8bd91] bg-[#f2e4ca] p-5 shadow-soft sm:p-8">
             <div className="pointer-events-none absolute -right-8 -top-12 size-44 rounded-full border-[22px] border-[#e4c58f]/50 sm:size-56" />
             <div className="relative z-10 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
               <div>
@@ -398,7 +501,7 @@ function Index() {
                   href={item.href}
                   target={external ? "_blank" : undefined}
                   rel={external ? "noreferrer" : undefined}
-                  className="group rounded-2xl border border-[#dec8a0] bg-[#fffaf1] p-4 shadow-soft transition hover:-translate-y-1 hover:shadow-glow"
+                  className="dark-readable group rounded-2xl border border-[#dec8a0] bg-[#fffaf1] p-4 shadow-soft transition hover:-translate-y-1 hover:shadow-glow"
                 >
                   <div className="flex items-start justify-between gap-3">
                     <span className="grid size-10 place-items-center rounded-xl bg-[#5d3925]/10 text-[#5d3925]">
@@ -417,7 +520,7 @@ function Index() {
               );
             })}
           </div>
-          <div className="mt-3 flex flex-wrap items-center justify-between gap-3 rounded-2xl bg-[#f2e4ca] px-4 py-3 text-sm text-[#5d3925]">
+          <div className="dark-readable mt-3 flex flex-wrap items-center justify-between gap-3 rounded-2xl bg-[#f2e4ca] px-4 py-3 text-sm text-[#5d3925]">
             <p className="font-semibold">
               <Clock3 className="mr-2 inline size-4" />
               Roz khule: {SHOP.hours}
@@ -431,7 +534,7 @@ function Index() {
             </button>
           </div>
           {showTodayNote && (
-            <p className="mt-2 rounded-xl border border-[#dec8a0] bg-[#fff7ea] px-4 py-3 text-sm text-[#5d3925]">
+            <p className="dark-readable mt-2 rounded-xl border border-[#dec8a0] bg-[#fff7ea] px-4 py-3 text-sm text-[#5d3925]">
               Cake ya bakery item ke liye aane se pehle WhatsApp par availability poochh lo—pickup
               aur easy ho jayega.
             </p>
@@ -518,7 +621,7 @@ function Index() {
                 return (
                   <div
                     key={offer.title}
-                    className="rounded-2xl border border-[#dec8a0] bg-[#fffaf1] p-4 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_35px_-22px_rgba(93,57,37,0.65)]"
+                    className="dark-readable rounded-2xl border border-[#dec8a0] bg-[#fffaf1] p-4 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_35px_-22px_rgba(93,57,37,0.65)]"
                   >
                     <div className="flex items-start gap-3">
                       <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-[#5d3925] text-[#fff6e8]">
@@ -562,7 +665,7 @@ function Index() {
                 </Link>
               </div>
 
-              <div className="mt-4 flex flex-col gap-3 rounded-2xl border border-[#d8bd91] bg-[#fff7ea] p-4 sm:flex-row sm:items-center sm:justify-between">
+              <div className="dark-readable mt-4 flex flex-col gap-3 rounded-2xl border border-[#d8bd91] bg-[#fff7ea] p-4 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-center gap-3">
                   <span className="grid size-10 place-items-center rounded-full bg-[#5d3925] text-[#fff6e8]">
                     <WandSparkles className="size-5" />
@@ -838,6 +941,7 @@ function Index() {
             </div>
           </div>
         </section>
+        <Personalization />
       </main>
 
       <Footer />
