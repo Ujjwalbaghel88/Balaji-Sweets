@@ -50,12 +50,14 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-border/80 bg-background/90 shadow-soft backdrop-blur-xl">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-2 px-3 py-2.5 sm:gap-3 sm:px-4 sm:py-3">
-        <Link to="/" className="flex items-center gap-2 flex-shrink-0">
-          <span className="grid size-8 sm:size-9 place-items-center rounded-xl bg-accent text-lg sm:text-lg shadow-soft">
-            🏪
-          </span>
-          <span className="leading-tight hidden sm:block">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-3 px-4">
+        <Link to="/" className="flex min-w-0 flex-shrink-0 items-center gap-2 sm:gap-3">
+          <img
+            src={`${import.meta.env.BASE_URL}baghel-navbar-logo.svg`}
+            alt="Baghel Store logo"
+            className="h-12 w-[4.25rem] rounded-lg bg-[#fff8ee] p-0.5 sm:h-14 sm:w-20"
+          />
+          <span className="hidden leading-tight sm:block">
             <span className="block text-xs sm:text-sm font-extrabold text-foreground">
               Balaji Pan & Bakery
             </span>
@@ -64,7 +66,7 @@ export function Header() {
             </span>
           </span>
         </Link>
-        <nav className="flex items-center gap-0.5 text-xs font-medium sm:gap-1 sm:text-sm">
+        <nav className="flex shrink-0 items-center gap-1 text-xs font-medium sm:gap-2 sm:text-sm">
           <Link
             to="/products"
             className="rounded-lg px-2 py-1.5 sm:px-2.5 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
@@ -99,7 +101,9 @@ export function Header() {
           <button
             type="button"
             onClick={toggleLanguage}
-            aria-label={language === "en" ? "Switch language to Hindi" : "Switch language to English"}
+            aria-label={
+              language === "en" ? "Switch language to Hindi" : "Switch language to English"
+            }
             className="ml-1 inline-flex h-9 shrink-0 items-center gap-1 rounded-lg border border-border bg-card px-2 text-xs font-bold text-foreground transition-colors hover:bg-secondary"
           >
             <Languages className="size-3.5" /> {language === "en" ? "हि" : "EN"}
@@ -196,16 +200,34 @@ export function Footer() {
               Location
             </a>
             <div className="flex items-center justify-center gap-3 pt-2" aria-label="Social links">
-              <a href={waLink()} target="_blank" rel="noreferrer" aria-label="WhatsApp" className="grid size-9 place-items-center rounded-full border border-border text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground">
+              <a
+                href={waLink()}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="WhatsApp"
+                className="grid size-9 place-items-center rounded-full border border-border text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+              >
                 <MessageCircle className="size-4" />
               </a>
               {import.meta.env.VITE_INSTAGRAM_URL && (
-                <a href={import.meta.env.VITE_INSTAGRAM_URL} target="_blank" rel="noreferrer" aria-label="Instagram" className="grid size-9 place-items-center rounded-full border border-border text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground">
+                <a
+                  href={import.meta.env.VITE_INSTAGRAM_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Instagram"
+                  className="grid size-9 place-items-center rounded-full border border-border text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+                >
                   <Instagram className="size-4" />
                 </a>
               )}
               {import.meta.env.VITE_GITHUB_URL && (
-                <a href={import.meta.env.VITE_GITHUB_URL} target="_blank" rel="noreferrer" aria-label="GitHub" className="grid size-9 place-items-center rounded-full border border-border text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground">
+                <a
+                  href={import.meta.env.VITE_GITHUB_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="GitHub"
+                  className="grid size-9 place-items-center rounded-full border border-border text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+                >
                   <Github className="size-4" />
                 </a>
               )}

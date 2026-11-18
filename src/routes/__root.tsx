@@ -96,7 +96,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       {
         rel: "icon",
-        href: `${import.meta.env.BASE_URL}balaji-favicon.svg`,
+        href: `${import.meta.env.BASE_URL}baghel-store-logo.svg`,
         type: "image/svg+xml",
       },
     ],
