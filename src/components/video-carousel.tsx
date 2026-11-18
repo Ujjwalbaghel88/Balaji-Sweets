@@ -121,6 +121,7 @@ export function VideoCarousel() {
       >
         <ArrowRight className="size-5" />
       </button>
+      
 
       <div className="absolute bottom-5 left-1/2 z-30 flex -translate-x-1/2 gap-2">
         {videoHighlights.map((src, index) => (

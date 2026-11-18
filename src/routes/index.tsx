@@ -21,27 +21,11 @@ import {
   Shuffle,
   WandSparkles,
   Gift,
-  ChevronDown,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Footer, Header, ProductCard, useLanguage } from "@/components/shop";
 import { VideoCarousel } from "@/components/video-carousel";
-import { SHOP, categories, popular, telLink, waLink } from "@/data/shop";
-import { Slider } from "@/components/ui/slider";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { SHOP, categories, popular, products, telLink, waLink } from "@/data/shop";
 import { Personalization } from "@/components/personalization";
 
 export const Route = createFileRoute("/")({
@@ -92,6 +76,104 @@ const featureCards = [
   },
 ];
 
+const catalogColors = ["#8b5e3c", "#df8c64", "#77937b", "#d6a46f"];
+
+function CatalogOverview() {
+  const catalog = categories.map((category, index) => {
+    const items = products.filter((product) => product.category === category.slug);
+    return {
+      name: category.slug,
+      count: items.length,
+      listedTotal: items.reduce((sum, product) => sum + product.price, 0),
+      color: catalogColors[index % catalogColors.length],
+    };
+  });
+  const maxCount = Math.max(...catalog.map((item) => item.count), 1);
+  const totalListed = catalog.reduce((sum, item) => sum + item.listedTotal, 0) || 1;
+  let progress = 0;
+  const donutStops = catalog.map((item) => {
+    const start = progress;
+    progress += (item.listedTotal / totalListed) * 100;
+    return `${item.color} ${start}% ${progress}%`;
+  });
+
+  return (
+    <div className="min-h-[26rem] rounded-3xl border border-[#dec8a0] bg-card p-5 shadow-soft sm:p-6">
+      <h3 className="font-display text-2xl font-extrabold text-foreground">Catalog overview</h3>
+      <p className="mt-1 text-xs leading-5 text-muted-foreground sm:text-sm">
+        Products listed and sum of listed prices by category. This is catalog data, not sales
+        analytics.
+      </p>
+      <div className="mt-7 grid items-center gap-7 sm:grid-cols-[1.2fr_0.8fr]">
+        <div className="grid grid-cols-[1fr_auto] items-end gap-x-3">
+          <div
+            className="relative flex h-44 items-end justify-around gap-3 border-b border-border px-2"
+            style={{
+              backgroundImage:
+                "repeating-linear-gradient(to bottom, transparent 0, transparent 42px, color-mix(in srgb, var(--color-border) 65%, transparent) 43px)",
+            }}
+            aria-label="Products listed by category"
+          >
+            {catalog.map((item) => (
+              <div
+                key={item.name}
+                className="z-10 flex h-full min-w-0 flex-1 flex-col items-center justify-end"
+              >
+                <span className="mb-1 text-xs text-muted-foreground">{item.count}</span>
+                <div
+                  className="w-full max-w-12 rounded-t-md"
+                  style={{
+                    height: `${Math.max((item.count / maxCount) * 72, 3)}%`,
+                    backgroundColor: item.color,
+                  }}
+                  title={`${item.count} ${item.name} products`}
+                />
+                <span className="mt-1 text-[10px] text-muted-foreground sm:text-xs">
+                  {item.name}
+                </span>
+              </div>
+            ))}
+          </div>
+          <div className="flex h-44 flex-col justify-between pb-0 text-[10px] text-muted-foreground">
+            {[8, 6, 4, 2, 0].map((value) => (
+              <span key={value}>{value}</span>
+            ))}
+          </div>
+          <div className="col-span-2 mt-8 text-center text-[10px] text-muted-foreground">
+            Listed products
+          </div>
+        </div>
+        <div className="flex flex-col items-center gap-3">
+          <div
+            className="grid size-36 place-items-center rounded-full sm:size-40"
+            style={{ background: `conic-gradient(${donutStops.join(", ")})` }}
+            role="img"
+            aria-label="Listed price total share by category"
+          >
+            <div className="grid size-20 place-items-center rounded-full bg-card text-center sm:size-24">
+              <span className="text-[10px] leading-4 text-muted-foreground">
+                Listed
+                <br />
+                prices
+              </span>
+            </div>
+          </div>
+          <div className="flex flex-wrap justify-center gap-x-3 gap-y-1">
+            {catalog.map((item) => (
+              <span
+                key={item.name}
+                className="inline-flex items-center gap-1 text-[10px] capitalize text-muted-foreground"
+              >
+                <span className="size-2 rounded-full" style={{ backgroundColor: item.color }} />
+                {item.name}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 const shopStats = [
   { value: "8 AM", label: "Open daily" },
   { value: "100%", label: "Fresh products" },
@@ -167,12 +249,13 @@ function Index() {
     const elements = document.querySelectorAll<HTMLElement>("main > section");
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const observer = new IntersectionObserver(
-      (entries) => entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
-        }
-      }),
+      (entries) =>
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        }),
       { threshold: 0.08 },
     );
     elements.forEach((element) => {
@@ -187,72 +270,6 @@ function Index() {
       <Header />
 
       <main className="overflow-hidden">
-        <section className="mx-auto max-w-7xl px-4 pt-5 sm:pt-8">
-          <div className="grid gap-4 rounded-3xl border border-border bg-card p-4 shadow-soft sm:gap-6 sm:p-6 lg:grid-cols-[1fr_auto] lg:items-center">
-            <div>
-              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-accent sm:text-xs">
-                Reusable UI · responsive by design
-              </p>
-              <h2 className="mt-1 font-display text-xl font-extrabold text-foreground sm:text-2xl">
-                {language === "en" ? "A few helpful shop shortcuts" : "दुकान के आसान विकल्प"}
-              </h2>
-              <p className="mt-1 text-xs leading-5 text-muted-foreground sm:text-sm">
-                {language === "en"
-                  ? "Browse a category, explore this week’s picks, or tune the product photo size."
-                  : "श्रेणी चुनें, लोकप्रिय उत्पाद देखें या तस्वीर का आकार बदलें।"}
-              </p>
-            </div>
-            <div className="flex flex-wrap items-center gap-2">
-              <DropdownMenu>
-                <DropdownMenuTrigger className="inline-flex h-10 items-center gap-2 rounded-xl border border-border bg-background px-3 text-sm font-semibold text-foreground transition-colors hover:bg-secondary">
-                  {language === "en" ? "Browse categories" : "श्रेणियाँ देखें"} <ChevronDown className="size-4" />
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="start">
-                  {categories.map((category) => (
-                    <DropdownMenuItem key={category.slug} asChild>
-                      <Link to="/category/$slug" params={{ slug: category.slug }}>
-                        {category.name}
-                      </Link>
-                    </DropdownMenuItem>
-                  ))}
-                </DropdownMenuContent>
-              </DropdownMenu>
-              <Dialog>
-                <DialogTrigger className="inline-flex h-10 items-center rounded-xl bg-accent px-4 text-sm font-bold text-accent-foreground shadow-soft transition-transform hover:-translate-y-0.5">
-                  {language === "en" ? "This week’s picks" : "इस हफ़्ते के पसंदीदा"}
-                </DialogTrigger>
-                <DialogContent className="max-h-[85vh] overflow-y-auto sm:max-w-2xl">
-                  <DialogHeader>
-                    <DialogTitle>Popular at Balaji</DialogTitle>
-                    <DialogDescription>
-                      A few customer favorites. Message us to check what’s fresh today.
-                    </DialogDescription>
-                  </DialogHeader>
-                  <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-                    {popular.slice(0, 6).map((product) => (
-                      <ProductCard key={product.id} product={product} />
-                    ))}
-                  </div>
-                </DialogContent>
-              </Dialog>
-            </div>
-            <div className="flex items-center gap-4 border-t border-border pt-4 lg:col-span-2 lg:max-w-md">
-              <label htmlFor="photo-size" className="shrink-0 text-xs font-semibold text-foreground">
-                {language === "en" ? "Photo size" : "तस्वीर का आकार"}
-              </label>
-              <Slider
-                id="photo-size"
-                aria-label="Product photo size"
-                defaultValue={[50]}
-                max={100}
-                step={10}
-                className="max-w-48"
-              />
-              <span className="text-xs text-muted-foreground">Compact ↔ Large</span>
-            </div>
-          </div>
-        </section>
-
         <section className="relative isolate">
           <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(217,179,122,0.22),transparent_34%),radial-gradient(circle_at_88%_20%,rgba(160,105,66,0.12),transparent_30%),linear-gradient(to_bottom,var(--color-background),color-mix(in_oklab,var(--color-secondary)_42%,var(--color-background)),var(--color-background))]" />
           <div className="pointer-events-none absolute inset-0 -z-10 opacity-35 [background-image:linear-gradient(rgba(93,57,37,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(93,57,37,0.06)_1px,transparent_1px)] [background-size:32px_32px] [mask-image:linear-gradient(to_bottom,black,transparent_72%)]" />
@@ -739,34 +756,33 @@ function Index() {
             </div>
 
             <div className="grid gap-4">
-              {featureCards.map((card, index) => (
-                <div
-                  key={card.title}
-                  className={`rounded-3xl border border-[#dec8a0] p-6 shadow-soft ${
-                    index === 0
-                      ? "bg-[#f5ead5]/80"
-                      : index === 1
-                        ? "bg-card"
-                        : "bg-[#5d3925] text-[#fff6e8]"
-                  }`}
-                >
-                  <p
-                    className={`text-xs font-bold uppercase tracking-[0.22em] ${
-                      index === 2 ? "text-[#fff6e8]/75" : "text-[#5d3925]"
-                    }`}
+              {featureCards.map((card, index) =>
+                index === 0 ? (
+                  <CatalogOverview key="catalog-overview" />
+                ) : index === 1 ? (
+                  <div
+                    key="baghel-store-logo"
+                    className="grid min-h-[26rem] place-items-center overflow-hidden rounded-3xl border border-[#dec8a0] bg-[#fff8ee] p-5 shadow-soft"
                   >
-                    Why people return
-                  </p>
-                  <h3 className="mt-2 font-display text-2xl font-extrabold">{card.title}</h3>
-                  <p
-                    className={`mt-2 text-sm leading-6 ${
-                      index === 2 ? "text-[#fff6e8]/90" : "text-muted-foreground"
-                    }`}
+                    <img
+                      src={`${import.meta.env.BASE_URL}baghel-store-logo.svg`}
+                      alt="Baghel Store logo"
+                      className="h-full max-h-[25rem] w-full object-contain"
+                    />
+                  </div>
+                ) : (
+                  <div
+                    key={card.title}
+                    className="rounded-3xl border border-[#dec8a0] bg-[#5d3925] p-6 text-[#fff6e8] shadow-soft"
                   >
-                    {card.copy}
-                  </p>
-                </div>
-              ))}
+                    <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#fff6e8]/75">
+                      Why people return
+                    </p>
+                    <h3 className="mt-2 font-display text-2xl font-extrabold">{card.title}</h3>
+                    <p className="mt-2 text-sm leading-6 text-[#fff6e8]/90">{card.copy}</p>
+                  </div>
+                ),
+              )}
             </div>
           </div>
         </section>
